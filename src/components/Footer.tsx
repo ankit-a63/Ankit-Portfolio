@@ -32,16 +32,16 @@ export const Footer: React.FC = () => {
 
           {/* Quick Anchor Jumps */}
           <div className="flex flex-wrap items-center gap-6 text-xs font-tech uppercase tracking-widest text-zinc-400">
-            <a href="#work" className="hover:text-accent-cyan transition-colors">
-              {t.nav.work}
-            </a>
-            <a href="#philosophy" className="hover:text-accent-cyan transition-colors">
+            <a href="#sector-story" className="hover:text-accent-cyan transition-colors">
               {t.nav.about}
             </a>
-            <a href="#skills" className="hover:text-accent-cyan transition-colors">
+            <a href="#sector-creations" className="hover:text-accent-cyan transition-colors">
+              {t.nav.work}
+            </a>
+            <a href="#sector-neural" className="hover:text-accent-cyan transition-colors">
               {t.nav.skills}
             </a>
-            <a href="#contact" className="hover:text-accent-cyan transition-colors">
+            <a href="#sector-beacon" className="hover:text-accent-cyan transition-colors">
               {t.nav.contact}
             </a>
           </div>
