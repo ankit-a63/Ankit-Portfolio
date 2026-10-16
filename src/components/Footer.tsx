@@ -35,7 +35,7 @@ export const Footer: React.FC = () => {
             <a href="#work" className="hover:text-accent-cyan transition-colors">
               {t.nav.work}
             </a>
-            <a href="#about" className="hover:text-accent-cyan transition-colors">
+            <a href="#philosophy" className="hover:text-accent-cyan transition-colors">
               {t.nav.about}
             </a>
             <a href="#skills" className="hover:text-accent-cyan transition-colors">

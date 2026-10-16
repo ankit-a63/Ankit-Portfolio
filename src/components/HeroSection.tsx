@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import { Hero3D } from './Hero3D';
 import { useLanguage } from '../context/LanguageContext';
 import { ArrowDown, Sparkles, Terminal, Code } from 'lucide-react';
 import gsap from 'gsap';
@@ -62,18 +61,11 @@ export const HeroSection: React.FC = () => {
     <section
       ref={heroRef}
       id="hero"
-      className="relative min-h-screen w-full flex flex-col justify-between pt-32 pb-12 px-6 sm:px-8 overflow-hidden bg-[#070709]"
+      className="relative min-h-screen w-full flex flex-col justify-between pt-36 pb-16 px-6 sm:px-12 lg:px-24 bg-transparent"
     >
-      {/* Background 3D Interactive Sculpture */}
-      <Hero3D />
-
-      {/* Depth Lighting and Atmospheric Vignette Gradients */}
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-[#070709]/40 to-[#070709] z-[1]" />
-      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_20%,#070709_90%)] z-[1]" />
-
       {/* Content Container */}
       <div className="relative z-10 max-w-7xl mx-auto w-full flex-1 flex flex-col justify-center">
-        {/* System Status & Monogram Reticle Pill */}
+        {/* System Status Pill */}
         <div ref={badgesRef} className="flex flex-wrap items-center gap-3 mb-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-zinc-700/60 bg-zinc-900/60 backdrop-blur-md text-xs font-tech tracking-widest text-zinc-300">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -107,7 +99,7 @@ export const HeroSection: React.FC = () => {
           </h1>
         </div>
 
-        {/* Descriptive Subhead / Overview */}
+        {/* Subhead / Overview */}
         <div ref={subheadRef} className="max-w-3xl space-y-4 mb-10">
           <p className="text-base sm:text-lg md:text-xl text-zinc-300 font-normal leading-relaxed">
             {t.hero.subhead}
@@ -117,7 +109,7 @@ export const HeroSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Functional Actions: Explore My Work & Let's Connect */}
+        {/* Actions: Explore My Work & Let's Connect */}
         <div ref={ctaContainerRef} className="flex flex-wrap items-center gap-4 sm:gap-6">
           <button
             onClick={() => scrollTo('work')}
@@ -140,7 +132,7 @@ export const HeroSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Bottom Atmospheric Reticle & Scroll Indicator */}
+      {/* Bottom Scroll Indicator */}
       <div className="relative z-10 max-w-7xl mx-auto w-full pt-8 flex items-center justify-between border-t border-white/[0.08] text-xs font-tech text-zinc-500">
         <div className="hidden sm:flex items-center gap-6">
           <div className="flex items-center gap-2">
@@ -152,7 +144,7 @@ export const HeroSection: React.FC = () => {
         </div>
 
         <button
-          onClick={() => scrollTo('work')}
+          onClick={() => scrollTo('philosophy')}
           className="flex items-center gap-2.5 text-zinc-400 hover:text-accent-cyan transition-colors ml-auto sm:ml-0"
         >
           <span className="text-[11px] font-tech tracking-widest">{t.hero.scrollHint}</span>

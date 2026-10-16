@@ -14,6 +14,7 @@ export default defineConfig({
         manualChunks: {
           three: ['three'],
           gsap: ['gsap'],
+          lenis: ['lenis'],
           react: ['react', 'react-dom'],
           lucide: ['lucide-react'],
         },

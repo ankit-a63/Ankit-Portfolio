@@ -18,7 +18,7 @@ export const Navbar: React.FC<NavbarProps> = ({ isMuted, onToggleSound }) => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 40);
 
-      const sections = ['work', 'about', 'skills', 'contact'];
+      const sections = ['work', 'philosophy', 'skills', 'contact'];
       const scrollPos = window.scrollY + 200;
 
       for (const section of sections) {
@@ -39,8 +39,8 @@ export const Navbar: React.FC<NavbarProps> = ({ isMuted, onToggleSound }) => {
   }, []);
 
   const navLinks = [
+    { id: 'philosophy', label: t.nav.about, href: '#philosophy' },
     { id: 'work', label: t.nav.work, href: '#work' },
-    { id: 'about', label: t.nav.about, href: '#about' },
     { id: 'skills', label: t.nav.skills, href: '#skills' },
     { id: 'contact', label: t.nav.contact, href: '#contact' },
   ];
