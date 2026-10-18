@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { portfolioContent } from '../data/translations';
-import { Volume2, VolumeX, ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { ASMonogram } from './ASMonogram';
 
-interface SpatialHUDProps {
-  isMuted: boolean;
-  onToggleSound: () => void;
-}
-
-export const SpatialHUD: React.FC<SpatialHUDProps> = ({ isMuted, onToggleSound }) => {
+export const SpatialHUD: React.FC = () => {
   const [scrollPercent, setScrollPercent] = useState(0);
   const [activeSector, setActiveSector] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -115,22 +110,8 @@ export const SpatialHUD: React.FC<SpatialHUDProps> = ({ isMuted, onToggleSound }
             })}
           </nav>
 
-          {/* Right Action Center: Audio Toggle + Contact Action */}
+          {/* Right Action Center: Contact Action */}
           <div className="hidden lg:flex items-center gap-4">
-            <button
-              onClick={onToggleSound}
-              className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-zinc-700/60 bg-zinc-900/60 hover:border-accent-cyan/60 hover:bg-zinc-800/80 transition-all text-xs font-tech tracking-wider text-zinc-300 hover:text-white focus:outline-none"
-              title={isMuted ? 'Atmosphere Audio Off' : 'Atmosphere Audio On'}
-              aria-label="Toggle ambient atmosphere audio"
-            >
-              {isMuted ? (
-                <VolumeX className="w-3.5 h-3.5" />
-              ) : (
-                <Volume2 className="w-3.5 h-3.5 text-accent-cyan animate-pulse" />
-              )}
-              <span>{isMuted ? 'AUDIO OFF' : 'AUDIO ON'}</span>
-            </button>
-
             <button
               onClick={() => warpToSector('sector-beacon')}
               className="group px-5 py-2 rounded-full border border-accent-cyan/40 bg-accent-cyan/10 hover:bg-accent-cyan hover:text-black transition-all duration-300 text-xs font-tech tracking-wider text-accent-cyan font-bold flex items-center gap-1.5 shadow-[0_0_15px_rgba(56,189,248,0.2)]"
@@ -142,13 +123,6 @@ export const SpatialHUD: React.FC<SpatialHUDProps> = ({ isMuted, onToggleSound }
 
           {/* Mobile Menu Button */}
           <div className="flex lg:hidden items-center gap-3">
-            <button
-              onClick={onToggleSound}
-              className="p-2 rounded-full border border-zinc-800 bg-zinc-900/80 text-zinc-400 hover:text-white"
-              aria-label="Toggle audio"
-            >
-              {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 text-accent-cyan" />}
-            </button>
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

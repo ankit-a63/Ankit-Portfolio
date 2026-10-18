@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { portfolioContent } from '../data/translations';
-import { Send, Copy, Check, MessageSquare, ExternalLink, AlertCircle, Phone, PhoneCall } from 'lucide-react';
+import { Send, Copy, Check, MessageSquare, ExternalLink, AlertCircle, Phone, PhoneCall, Mail } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 const GithubIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
@@ -21,11 +21,16 @@ const WhatsappIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' 
   </svg>
 );
 
+const GmailIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+  </svg>
+);
+
 export const SectorContact: React.FC = () => {
   const { contact: tContact } = portfolioContent;
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
     subject: '',
     message: '',
   });
@@ -33,7 +38,7 @@ export const SectorContact: React.FC = () => {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isCopied, setIsCopied] = useState(false);
   const [isPhoneCopied, setIsPhoneCopied] = useState(false);
-  const [submissionFeedback, setSubmissionFeedback] = useState<string | null>(null);
+  const [submittedLink, setSubmittedLink] = useState<{ gmail: string; mailto: string } | null>(null);
 
   const contactEmail = 'ankitsani6288@gmail.com';
   const phoneNumber = '6388872564';
@@ -57,8 +62,9 @@ export const SectorContact: React.FC = () => {
   const validate = () => {
     const newErrors: { [key: string]: string } = {};
     if (!formData.name.trim()) newErrors.name = tContact.validationErrors.name;
-    if (!formData.email.trim() || !formData.email.includes('@')) newErrors.email = tContact.validationErrors.email;
-    if (!formData.message.trim() || formData.message.length < 5) newErrors.message = tContact.validationErrors.message;
+    if (!formData.message.trim() || formData.message.trim().length < 3) {
+      newErrors.message = tContact.validationErrors.message;
+    }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -76,17 +82,23 @@ export const SectorContact: React.FC = () => {
       });
     } catch {}
 
-    const subjectParam = encodeURIComponent(formData.subject.trim() || `Transmission from ${formData.name}`);
-    const bodyParam = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}\n\n[Transmitted via Ankit Singh Portfolio Terminal]`
-    );
+    const subjectStr = formData.subject.trim() || (formData.name.trim() ? `Inquiry from ${formData.name.trim()}` : 'Portfolio Project Inquiry');
+    const bodyStr = `Hi Ankit,\n\n${formData.message.trim()}\n\nBest regards,\n${formData.name.trim() || 'Visitor'}`;
 
-    const mailtoUrl = `mailto:${contactEmail}?subject=${subjectParam}&body=${bodyParam}`;
-    window.location.href = mailtoUrl;
+    // 1. Direct Web Gmail Compose URL (Opens Gmail in browser with pre-filled To, Subject, and Body)
+    const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${contactEmail}&su=${encodeURIComponent(subjectStr)}&body=${encodeURIComponent(bodyStr)}`;
 
-    setSubmissionFeedback(
-      `Opening email client to send transmission to ${contactEmail}. If your client didn't open automatically, please click "Copy Email" to copy the address!`
-    );
+    // 2. Standard mailto fallback
+    const mailtoUrl = `mailto:${contactEmail}?subject=${encodeURIComponent(subjectStr)}&body=${encodeURIComponent(bodyStr)}`;
+
+    setSubmittedLink({ gmail: gmailComposeUrl, mailto: mailtoUrl });
+
+    // Open Gmail directly in a new tab
+    const newWindow = window.open(gmailComposeUrl, '_blank');
+    if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+      // If browser blocked popup, fallback to mailto
+      window.location.href = mailtoUrl;
+    }
   };
 
   return (
@@ -239,12 +251,23 @@ export const SectorContact: React.FC = () => {
             </div>
           </div>
 
-          {/* Right: Quantum Transmission Form (7 Cols) */}
+          {/* Right: Direct Gmail Dispatch Form (7 Cols) */}
           <div className="lg:col-span-7">
             <form
               onSubmit={handleSubmit}
               className="rounded-3xl border border-white/[0.1] bg-[#08080e]/95 backdrop-blur-2xl p-8 sm:p-12 space-y-6 shadow-2xl"
             >
+              {/* Recipient Notice Banner */}
+              <div className="flex flex-wrap items-center justify-between gap-3 p-4 rounded-2xl bg-accent-cyan/10 border border-accent-cyan/25 text-xs font-tech">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-2 h-2 rounded-full bg-accent-cyan animate-pulse" />
+                  <span className="text-zinc-400">TO (RECEIVER):</span>
+                  <span className="text-white font-bold select-all">{contactEmail}</span>
+                </div>
+                <span className="text-[11px] text-accent-cyan">AUTOMATICALLY PRE-FILLED</span>
+              </div>
+
+              {/* Form Inputs (No Email needed from visitor because it sends from their own Gmail account) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-xs font-tech tracking-wider uppercase text-zinc-400 block">
@@ -254,7 +277,7 @@ export const SectorContact: React.FC = () => {
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="e.g. Alex Morgan"
+                    placeholder="e.g. Sanni Singh"
                     className={`w-full px-4 py-3.5 rounded-xl bg-black/60 border text-sm text-white placeholder-zinc-600 focus:outline-none transition-colors ${
                       errors.name ? 'border-red-500/80' : 'border-white/[0.08] focus:border-accent-cyan'
                     }`}
@@ -264,43 +287,32 @@ export const SectorContact: React.FC = () => {
 
                 <div className="space-y-2">
                   <label className="text-xs font-tech tracking-wider uppercase text-zinc-400 block">
-                    {tContact.formEmail} *
+                    {tContact.formSubject}
                   </label>
                   <input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="alex@domain.com"
-                    className={`w-full px-4 py-3.5 rounded-xl bg-black/60 border text-sm text-white placeholder-zinc-600 focus:outline-none transition-colors ${
-                      errors.email ? 'border-red-500/80' : 'border-white/[0.08] focus:border-accent-cyan'
-                    }`}
+                    type="text"
+                    value={formData.subject}
+                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                    placeholder="e.g. Build medical app"
+                    className="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-accent-cyan transition-colors"
                   />
-                  {errors.email && <span className="text-[11px] font-tech text-red-400 block">{errors.email}</span>}
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-tech tracking-wider uppercase text-zinc-400 block">
-                  {tContact.formSubject}
-                </label>
-                <input
-                  type="text"
-                  value={formData.subject}
-                  onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                  placeholder="Collaboration, Web Development or Project Inquiry"
-                  className="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-accent-cyan transition-colors"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-xs font-tech tracking-wider uppercase text-zinc-400 block">
-                  {tContact.formMessage} *
-                </label>
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-tech tracking-wider uppercase text-zinc-400 block">
+                    {tContact.formMessage} *
+                  </label>
+                  <span className="text-[11px] font-tech text-zinc-500">
+                    Will appear pre-filled in your Gmail
+                  </span>
+                </div>
                 <textarea
-                  rows={4}
+                  rows={5}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="Write your note, proposal, or thoughts here..."
+                  placeholder="Type your message here (e.g. Please respond regarding medical app build)..."
                   className={`w-full px-4 py-3.5 rounded-xl bg-black/60 border text-sm text-white placeholder-zinc-600 focus:outline-none transition-colors resize-none ${
                     errors.message ? 'border-red-500/80' : 'border-white/[0.08] focus:border-accent-cyan'
                   }`}
@@ -308,18 +320,44 @@ export const SectorContact: React.FC = () => {
                 {errors.message && <span className="text-[11px] font-tech text-red-400 block">{errors.message}</span>}
               </div>
 
+              {/* Submit Action: Direct Launch in Gmail */}
               <button
                 type="submit"
-                className="w-full py-4 rounded-xl bg-accent-cyan hover:bg-sky-400 text-black font-tech font-bold text-xs sm:text-sm tracking-widest uppercase transition-all duration-300 shadow-[0_0_25px_rgba(56,189,248,0.3)] hover:shadow-[0_0_35px_rgba(56,189,248,0.6)] flex items-center justify-center gap-2"
+                className="w-full py-4 rounded-xl bg-accent-cyan hover:bg-sky-400 text-black font-tech font-bold text-xs sm:text-sm tracking-widest uppercase transition-all duration-300 shadow-[0_0_25px_rgba(56,189,248,0.3)] hover:shadow-[0_0_35px_rgba(56,189,248,0.6)] flex items-center justify-center gap-2.5"
               >
-                <Send className="w-4 h-4" />
-                <span>{tContact.sendBtn}</span>
+                <GmailIcon className="w-4 h-4 text-black" />
+                <span>OPEN & SEND IN GMAIL</span>
+                <Send className="w-4 h-4 ml-1" />
               </button>
 
-              {submissionFeedback && (
-                <div className="p-4 rounded-xl bg-accent-cyan/10 border border-accent-cyan/30 text-xs font-tech text-accent-cyan leading-relaxed flex items-start gap-2.5">
-                  <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-                  <span>{submissionFeedback}</span>
+              {/* Success / Feedback Banner with 1-click links */}
+              {submittedLink && (
+                <div className="p-5 rounded-2xl bg-[#0d1620] border border-accent-cyan/40 space-y-3">
+                  <div className="flex items-start gap-2.5 text-xs font-tech text-accent-cyan">
+                    <Check className="w-4 h-4 shrink-0 text-emerald-400 mt-0.5" />
+                    <span>
+                      Gmail compose tab launched with receiver <strong className="text-white font-mono select-all">{contactEmail}</strong> and your message pre-filled. Just click <strong>Send</strong> in Gmail!
+                    </span>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-3 pt-2 border-t border-white/[0.08] text-xs font-tech">
+                    <a
+                      href={submittedLink.gmail}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3.5 py-1.5 rounded-lg bg-accent-cyan/20 hover:bg-accent-cyan/30 text-accent-cyan transition-colors flex items-center gap-1.5"
+                    >
+                      <GmailIcon className="w-3.5 h-3.5" />
+                      <span>Re-open in Gmail Web</span>
+                    </a>
+                    <a
+                      href={submittedLink.mailto}
+                      className="px-3.5 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors flex items-center gap-1.5"
+                    >
+                      <Mail className="w-3.5 h-3.5" />
+                      <span>Open in Mail App (Outlook / Apple Mail)</span>
+                    </a>
+                  </div>
                 </div>
               )}
             </form>

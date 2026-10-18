@@ -10,7 +10,7 @@
 - **Interactive 3D WebGL Sculpture**: Custom Three.js composition featuring a dark faceted chrome polyhedron, delicate orbital gimbal rings, and a 1,800-particle celestial stardust wave with smooth pointer parallax.
 - **Editorial Typography & Visual Identity**: Deep obsidian tones (`#050508`), charcoal, titanium silver, and electric cyan accents.
 - **Full GSAP Motion System**: Choreographed entrance timelines, scroll-triggered section reveals, and tactile micro-interactions.
-- **Ambient Audio Synthesizer**: Native Web Audio API futuristic soundscape (muted by default with toggle).
+- **Direct Gmail Web & WhatsApp Dispatch**: Seamless pre-filled communication directly into client Gmail with recipient `ankitsani6288@gmail.com`.
 - **Custom Desktop Cursor**: Magnetic trailing cursor with dynamic hover states (disabled on touch devices).
 
 ---

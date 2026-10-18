@@ -9,16 +9,10 @@ import { SectorStory } from './components/SectorStory';
 import { SectorProjects } from './components/SectorProjects';
 import { SectorSkills } from './components/SectorSkills';
 import { SectorContact } from './components/SectorContact';
-import { AudioAmbient } from './components/AudioAmbient';
 import { Footer } from './components/Footer';
 
 export const AppContent: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-
-  const toggleSound = () => {
-    setIsAudioPlaying((prev) => !prev);
-  };
 
   return (
     <SmoothScroll>
@@ -30,13 +24,7 @@ export const AppContent: React.FC = () => {
         <SpatialCanvas />
 
         {/* Cockpit Header & Navigation HUD */}
-        <SpatialHUD
-          isMuted={!isAudioPlaying}
-          onToggleSound={toggleSound}
-        />
-
-        {/* Ambient Web Audio Synthesizer */}
-        <AudioAmbient isPlaying={isAudioPlaying} />
+        <SpatialHUD />
 
         {/* Cinematic Preloader */}
         {!isLoaded && <Preloader onComplete={() => setIsLoaded(true)} />}
