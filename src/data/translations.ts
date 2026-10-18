@@ -102,7 +102,7 @@ export const portfolioContent = {
     sendBtn: 'SEND MESSAGE',
     sendingBtn: 'PROCESSING...',
     directEmailTitle: 'DIRECT INQUIRY',
-    directEmailNote: 'Directly opens your default email client with your pre-filled message drafted to ankit.singh.dev.in@gmail.com.',
+    directEmailNote: 'Directly opens your default email client with your pre-filled message drafted to ankitsani6288@gmail.com.',
     copyEmail: 'COPY EMAIL ADDRESS',
     copiedEmail: 'EMAIL COPIED TO CLIPBOARD',
     socialsTitle: 'VERIFIED PROFILES',

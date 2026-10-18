@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { portfolioContent } from '../data/translations';
-import { Send, Copy, Check, MessageSquare, ExternalLink, AlertCircle } from 'lucide-react';
+import { Send, Copy, Check, MessageSquare, ExternalLink, AlertCircle, Phone, PhoneCall } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 const GithubIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
@@ -15,6 +15,12 @@ const LinkedinIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' 
   </svg>
 );
 
+const WhatsappIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.02L7.55 18.84L4.44 19.66L5.27 16.63L5.07 16.31C4.24 15 3.8 13.48 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.06 7.42C8.89 7.42 8.62 7.48 8.39 7.73C8.16 7.97 7.5 8.59 7.5 9.87C7.5 11.15 8.43 12.38 8.56 12.56C8.69 12.73 10.37 15.33 12.94 16.44C13.55 16.7 14.03 16.86 14.4 16.98C15.02 17.18 15.58 17.15 16.03 17.08C16.53 17.01 17.57 16.45 17.78 15.84C18 15.24 18 14.72 17.93 14.61C17.86 14.5 17.69 14.44 17.44 14.31C17.19 14.19 15.96 13.58 15.73 13.5C15.5 13.41 15.34 13.37 15.17 13.62C15 13.87 14.53 14.44 14.39 14.61C14.24 14.77 14.1 14.79 13.85 14.67C13.6 14.54 12.79 14.28 11.83 13.42C11.08 12.75 10.58 11.93 10.43 11.68C10.29 11.43 10.42 11.29 10.54 11.17C10.65 11.06 10.79 10.88 10.92 10.73C11.04 10.58 11.09 10.47 11.17 10.31C11.25 10.14 11.21 10 11.15 9.87C11.09 9.75 10.62 8.6 10.43 8.13C10.24 7.68 10.05 7.74 9.9 7.73C9.76 7.73 9.6 7.72 9.43 7.72C9.26 7.72 9.06 7.42 9.06 7.42Z" />
+  </svg>
+);
+
 export const SectorContact: React.FC = () => {
   const { contact: tContact } = portfolioContent;
   const [formData, setFormData] = useState({
@@ -26,9 +32,13 @@ export const SectorContact: React.FC = () => {
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isCopied, setIsCopied] = useState(false);
+  const [isPhoneCopied, setIsPhoneCopied] = useState(false);
   const [submissionFeedback, setSubmissionFeedback] = useState<string | null>(null);
 
-  const contactEmail = 'ankitsingh.dev.in@gmail.com';
+  const contactEmail = 'ankitsani6288@gmail.com';
+  const phoneNumber = '6388872564';
+  const formattedPhone = '+91 63888 72564';
+  const whatsappUrl = `https://wa.me/916388872564?text=${encodeURIComponent('Hi Ankit, I visited your 3D portfolio and would like to connect!')}`;
   const githubUrl = 'https://github.com/ankit-a63/Ankit-Portfolio';
   const linkedinUrl = 'https://linkedin.com/';
 
@@ -36,6 +46,12 @@ export const SectorContact: React.FC = () => {
     navigator.clipboard.writeText(contactEmail);
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 3000);
+  };
+
+  const handleCopyPhone = () => {
+    navigator.clipboard.writeText(phoneNumber);
+    setIsPhoneCopied(true);
+    setTimeout(() => setIsPhoneCopied(false), 3000);
   };
 
   const validate = () => {
@@ -97,16 +113,21 @@ export const SectorContact: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left: Dispatch Center (5 Cols) */}
-          <div className="lg:col-span-5 space-y-8">
-            <div className="rounded-3xl border border-white/[0.1] bg-[#090910]/85 backdrop-blur-2xl p-8 space-y-6">
+          <div className="lg:col-span-5 space-y-6">
+            {/* Direct Email Card */}
+            <div className="rounded-3xl border border-white/[0.1] bg-[#090910]/85 backdrop-blur-2xl p-7 space-y-5">
               <div className="text-xs font-tech text-accent-cyan tracking-widest uppercase">
                 {tContact.directEmailTitle}
               </div>
 
               <div className="p-4 rounded-2xl bg-black/60 border border-white/[0.08] flex items-center justify-between gap-3">
-                <span className="font-tech text-sm text-zinc-200 truncate select-all">
+                <a
+                  href={`mailto:${contactEmail}`}
+                  className="font-tech text-sm text-zinc-200 hover:text-accent-cyan truncate select-all transition-colors"
+                  title="Send email"
+                >
                   {contactEmail}
-                </span>
+                </a>
                 <button
                   onClick={handleCopyEmail}
                   className="shrink-0 p-2.5 rounded-xl bg-zinc-800 hover:bg-accent-cyan hover:text-black text-zinc-300 transition-all"
@@ -118,22 +139,64 @@ export const SectorContact: React.FC = () => {
               </div>
 
               <p className="text-xs font-tech text-zinc-400 leading-relaxed">
-                {tContact.directEmailNote}
+                Directly opens your email client drafted to <span className="text-zinc-200">{contactEmail}</span>.
               </p>
+            </div>
 
-              <div className="pt-4 border-t border-white/[0.06] text-xs font-tech text-emerald-400 flex items-center gap-2">
+            {/* Direct Phone & WhatsApp Card */}
+            <div className="rounded-3xl border border-white/[0.1] bg-[#090910]/85 backdrop-blur-2xl p-7 space-y-5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-tech text-emerald-400 tracking-widest uppercase flex items-center gap-2">
+                  <Phone className="w-3.5 h-3.5" />
+                  <span>DIRECT CALL & WHATSAPP</span>
+                </span>
+                <span className="text-[10px] font-tech text-zinc-500 uppercase">INSTANT REACH</span>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-black/60 border border-white/[0.08] flex items-center justify-between gap-3">
+                <a
+                  href={`tel:${phoneNumber}`}
+                  className="font-tech text-sm text-zinc-200 hover:text-emerald-400 truncate select-all transition-colors flex items-center gap-2"
+                  title="Call directly"
+                >
+                  <PhoneCall className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>{formattedPhone}</span>
+                </a>
+                <button
+                  onClick={handleCopyPhone}
+                  className="shrink-0 p-2.5 rounded-xl bg-zinc-800 hover:bg-emerald-400 hover:text-black text-zinc-300 transition-all"
+                  title={isPhoneCopied ? 'Phone Copied!' : 'Copy Phone Number'}
+                  aria-label="Copy phone number"
+                >
+                  {isPhoneCopied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                </button>
+              </div>
+
+              {/* Instant WhatsApp Action Button */}
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl bg-emerald-500/15 border border-emerald-500/30 hover:bg-emerald-500/25 text-emerald-400 hover:text-emerald-300 font-tech text-xs tracking-wider uppercase transition-all duration-300 shadow-[0_0_20px_rgba(16,185,129,0.15)]"
+              >
+                <WhatsappIcon className="w-4 h-4 text-emerald-400" />
+                <span>CHAT ON WHATSAPP (+91 {phoneNumber})</span>
+                <ExternalLink className="w-3 h-3 ml-1" />
+              </a>
+
+              <div className="pt-2 border-t border-white/[0.06] text-xs font-tech text-emerald-400 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span>{tContact.availability}</span>
               </div>
             </div>
 
-            {/* Socials */}
-            <div className="rounded-3xl border border-white/[0.08] bg-[#08080e]/70 p-8 space-y-4">
+            {/* Verified Profiles */}
+            <div className="rounded-3xl border border-white/[0.08] bg-[#08080e]/70 p-7 space-y-4">
               <div className="text-xs font-tech text-zinc-400 tracking-widest uppercase">
                 {tContact.socialsTitle}
               </div>
 
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-2.5">
                 <a
                   href={githubUrl}
                   target="_blank"
@@ -158,6 +221,19 @@ export const SectorContact: React.FC = () => {
                     <span>LinkedIn Professional Network</span>
                   </div>
                   <ExternalLink className="w-3.5 h-3.5 text-zinc-500" />
+                </a>
+
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between p-3.5 rounded-xl border border-emerald-500/20 bg-emerald-950/20 hover:border-emerald-500/40 text-xs font-tech text-emerald-300 transition-all"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <WhatsappIcon className="w-4 h-4 text-emerald-400" />
+                    <span>WhatsApp Direct Transmission</span>
+                  </div>
+                  <ExternalLink className="w-3.5 h-3.5 text-emerald-500/60" />
                 </a>
               </div>
             </div>
