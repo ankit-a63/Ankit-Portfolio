@@ -70,18 +70,18 @@ export const SpatialHUD: React.FC = () => {
             : 'py-6 bg-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10 flex items-center justify-between">
           {/* Brand Identity */}
           <button
             onClick={() => warpToSector('sector-origin')}
-            className="group flex items-center gap-3.5 focus:outline-none text-left"
+            className="group flex items-center gap-2.5 sm:gap-3.5 focus:outline-none text-left"
           >
-            <ASMonogram size={38} glow={true} className="transition-transform duration-300 group-hover:scale-105" />
+            <ASMonogram size={34} glow={true} className="transition-transform duration-300 group-hover:scale-105 shrink-0" />
             <div className="flex flex-col">
               <span className="font-editorial font-bold text-sm sm:text-base tracking-widest text-white group-hover:text-accent-cyan transition-colors">
                 ANKIT SINGH
               </span>
-              <span className="text-[10px] font-tech tracking-wider text-zinc-400">
+              <span className="text-[10px] font-tech tracking-wider text-zinc-400 truncate max-w-[140px] xs:max-w-[200px] sm:max-w-none">
                 Govt. Polytechnic Bansdeeh, Ballia
               </span>
             </div>
@@ -155,8 +155,17 @@ export const SpatialHUD: React.FC = () => {
           </div>
 
           <div className="flex flex-col gap-4 pt-6 border-t border-zinc-800 text-xs font-tech text-zinc-400">
-            <div>Govt. Polytechnic Bansdeeh, Ballia</div>
-            <div>Summer Training @ SkillManthan Technologies</div>
+            <button
+              onClick={() => warpToSector('sector-beacon')}
+              className="w-full py-3.5 rounded-xl bg-accent-cyan text-black font-bold text-center tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(56,189,248,0.3)] flex items-center justify-center gap-2"
+            >
+              <span>LET'S CONNECT</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </button>
+            <div className="flex items-center justify-between text-[11px] text-zinc-500 pt-1">
+              <span>Govt. Polytechnic Bansdeeh, Ballia</span>
+              <span>CSE 4th Sem</span>
+            </div>
           </div>
         </div>
       )}

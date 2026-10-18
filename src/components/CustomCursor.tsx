@@ -18,7 +18,7 @@ export const CustomCursor: React.FC = () => {
     // Check if device supports fine pointer (mouse/trackpad)
     const mediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
     const checkTouch = () => {
-      const isTouch = !mediaQuery.matches || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isTouch = window.innerWidth < 1024 || !mediaQuery.matches || 'ontouchstart' in window;
       setIsTouchDevice(isTouch);
       if (!isTouch) {
         document.body.classList.add('custom-cursor-active');
@@ -29,8 +29,9 @@ export const CustomCursor: React.FC = () => {
 
     checkTouch();
     mediaQuery.addEventListener('change', checkTouch);
+    window.addEventListener('resize', checkTouch);
 
-    if (!mediaQuery.matches) return;
+    if (window.innerWidth < 1024 || !mediaQuery.matches) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       mousePos.current = { x: e.clientX, y: e.clientY };

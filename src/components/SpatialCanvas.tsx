@@ -192,38 +192,44 @@ export const SpatialCanvas: React.FC = () => {
       currentMouseY += (targetMouseY - currentMouseY) * 0.05;
 
       // SCROLL-DRIVEN SPATIAL STAGES:
+      // Responsive base scaling for mobile and tablet devices
+      const isMobile = window.innerWidth < 768;
+      const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+      const baseScale = isMobile ? 0.55 : (isTablet ? 0.75 : 1.0);
+
       // Smoothly glides across the screen without ever blocking typography
       let targetX = window.innerWidth > 1024 ? 2.5 : 0;
-      let targetY = 0;
-      let targetZ = -1;
-      let targetScale = window.innerWidth > 1024 ? 1.0 : 0.75;
+      let targetY = isMobile ? 0.7 : 0;
+      let targetZ = isMobile ? -3.0 : -1;
+      let targetScale = baseScale;
 
       if (scrollProgress < 0.25) {
-        // Hero: Balanced on right side
+        // Hero: Balanced on right side for desktop, atmospheric backdrop for mobile
         targetX = window.innerWidth > 1024 ? 2.4 : 0;
-        targetY = currentMouseY * 0.4;
-        targetZ = -1 + scrollProgress * 2;
+        targetY = isMobile ? 0.8 : currentMouseY * 0.4;
+        targetZ = isMobile ? -3.2 : -1 + scrollProgress * 2;
+        targetScale = baseScale;
       } else if (scrollProgress < 0.55) {
         // About / Philosophy: Sweeps toward center-left softly
         const t = (scrollProgress - 0.25) / 0.3;
         targetX = THREE.MathUtils.lerp(window.innerWidth > 1024 ? 2.4 : 0, window.innerWidth > 1024 ? -2.8 : 0, t);
-        targetY = THREE.MathUtils.lerp(0, 0.4, t);
-        targetZ = THREE.MathUtils.lerp(1, 0, t);
-        targetScale = THREE.MathUtils.lerp(1.0, 1.15, t);
+        targetY = THREE.MathUtils.lerp(isMobile ? 0.8 : 0, isMobile ? 0.5 : 0.4, t);
+        targetZ = THREE.MathUtils.lerp(isMobile ? -3.2 : 1, isMobile ? -3.0 : 0, t);
+        targetScale = baseScale * THREE.MathUtils.lerp(1.0, 1.15, t);
       } else if (scrollProgress < 0.8) {
         // Projects: Shifts to far right framing the project slides
         const t = (scrollProgress - 0.55) / 0.25;
         targetX = THREE.MathUtils.lerp(window.innerWidth > 1024 ? -2.8 : 0, window.innerWidth > 1024 ? 3.0 : 0, t);
-        targetY = THREE.MathUtils.lerp(0.4, -0.3, t);
-        targetZ = THREE.MathUtils.lerp(0, -0.5, t);
-        targetScale = THREE.MathUtils.lerp(1.15, 0.9, t);
+        targetY = THREE.MathUtils.lerp(isMobile ? 0.5 : 0.4, isMobile ? 0.2 : -0.3, t);
+        targetZ = THREE.MathUtils.lerp(isMobile ? -3.0 : 0, isMobile ? -3.5 : -0.5, t);
+        targetScale = baseScale * THREE.MathUtils.lerp(1.15, 0.9, t);
       } else {
         // Contact: Centers into radiant focal beacon
         const t = (scrollProgress - 0.8) / 0.2;
         targetX = THREE.MathUtils.lerp(window.innerWidth > 1024 ? 3.0 : 0, 0, t);
-        targetY = THREE.MathUtils.lerp(-0.3, 0.6, t);
-        targetZ = THREE.MathUtils.lerp(-0.5, 1.0, t);
-        targetScale = THREE.MathUtils.lerp(0.9, 1.25, t);
+        targetY = THREE.MathUtils.lerp(isMobile ? 0.2 : -0.3, isMobile ? 0.7 : 0.6, t);
+        targetZ = THREE.MathUtils.lerp(isMobile ? -3.5 : -0.5, isMobile ? -2.5 : 1.0, t);
+        targetScale = baseScale * THREE.MathUtils.lerp(0.9, 1.25, t);
       }
 
       masterGroup.position.x += (targetX - masterGroup.position.x) * 0.05;

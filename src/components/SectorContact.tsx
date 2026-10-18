@@ -96,7 +96,6 @@ export const SectorContact: React.FC = () => {
     // Open Gmail directly in a new tab
     const newWindow = window.open(gmailComposeUrl, '_blank');
     if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-      // If browser blocked popup, fallback to mailto
       window.location.href = mailtoUrl;
     }
   };
@@ -104,45 +103,45 @@ export const SectorContact: React.FC = () => {
   return (
     <section
       id="sector-beacon"
-      className="relative min-h-screen py-36 px-6 sm:px-12 lg:px-24 z-10 flex flex-col justify-center"
+      className="relative min-h-screen py-20 sm:py-36 px-4 sm:px-12 lg:px-24 z-10 flex flex-col justify-center overflow-hidden"
     >
       <div className="max-w-7xl mx-auto w-full">
         {/* Sector Tag */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-accent-cyan/30 bg-black/60 text-xs font-tech text-accent-cyan tracking-widest uppercase mb-8">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-accent-cyan/30 bg-black/60 text-xs font-tech text-accent-cyan tracking-widest uppercase mb-6 sm:mb-8">
           <MessageSquare className="w-3.5 h-3.5" />
           <span>SECTOR 05 // {tContact.badge}</span>
         </div>
 
         {/* Heading */}
-        <div className="mb-20">
-          <h2 className="text-4xl sm:text-6xl lg:text-8xl font-editorial font-extrabold tracking-tight text-white leading-[0.98] max-w-5xl">
+        <div className="mb-10 sm:mb-16">
+          <h2 className="text-3xl sm:text-6xl lg:text-8xl font-editorial font-extrabold tracking-tight text-white leading-[0.98] max-w-5xl break-words">
             {tContact.headline}
           </h2>
-          <p className="mt-6 text-zinc-400 font-tech text-sm sm:text-base max-w-2xl leading-relaxed">
+          <p className="mt-4 sm:mt-6 text-zinc-400 font-tech text-xs sm:text-base max-w-2xl leading-relaxed">
             {tContact.subhead}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Left: Dispatch Center (5 Cols) */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-5 space-y-4 sm:space-y-6">
             {/* Direct Email Card */}
-            <div className="rounded-3xl border border-white/[0.1] bg-[#090910]/85 backdrop-blur-2xl p-7 space-y-5">
+            <div className="rounded-2xl sm:rounded-3xl border border-white/[0.1] bg-[#090910]/85 backdrop-blur-2xl p-5 sm:p-7 space-y-4 sm:space-y-5">
               <div className="text-xs font-tech text-accent-cyan tracking-widest uppercase">
                 {tContact.directEmailTitle}
               </div>
 
-              <div className="p-4 rounded-2xl bg-black/60 border border-white/[0.08] flex items-center justify-between gap-3">
+              <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-black/60 border border-white/[0.08] flex items-center justify-between gap-2.5">
                 <a
                   href={`mailto:${contactEmail}`}
-                  className="font-tech text-sm text-zinc-200 hover:text-accent-cyan truncate select-all transition-colors"
+                  className="font-tech text-xs sm:text-sm text-zinc-200 hover:text-accent-cyan truncate select-all transition-colors"
                   title="Send email"
                 >
                   {contactEmail}
                 </a>
                 <button
                   onClick={handleCopyEmail}
-                  className="shrink-0 p-2.5 rounded-xl bg-zinc-800 hover:bg-accent-cyan hover:text-black text-zinc-300 transition-all"
+                  className="shrink-0 p-2 sm:p-2.5 rounded-lg sm:rounded-xl bg-zinc-800 hover:bg-accent-cyan hover:text-black text-zinc-300 transition-all"
                   title={isCopied ? tContact.copiedEmail : tContact.copyEmail}
                   aria-label="Copy email address"
                 >
@@ -156,7 +155,7 @@ export const SectorContact: React.FC = () => {
             </div>
 
             {/* Direct Phone & WhatsApp Card */}
-            <div className="rounded-3xl border border-white/[0.1] bg-[#090910]/85 backdrop-blur-2xl p-7 space-y-5">
+            <div className="rounded-2xl sm:rounded-3xl border border-white/[0.1] bg-[#090910]/85 backdrop-blur-2xl p-5 sm:p-7 space-y-4 sm:space-y-5">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-tech text-emerald-400 tracking-widest uppercase flex items-center gap-2">
                   <Phone className="w-3.5 h-3.5" />
@@ -165,18 +164,18 @@ export const SectorContact: React.FC = () => {
                 <span className="text-[10px] font-tech text-zinc-500 uppercase">INSTANT REACH</span>
               </div>
 
-              <div className="p-4 rounded-2xl bg-black/60 border border-white/[0.08] flex items-center justify-between gap-3">
+              <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-black/60 border border-white/[0.08] flex items-center justify-between gap-2.5">
                 <a
                   href={`tel:${phoneNumber}`}
-                  className="font-tech text-sm text-zinc-200 hover:text-emerald-400 truncate select-all transition-colors flex items-center gap-2"
+                  className="font-tech text-xs sm:text-sm text-zinc-200 hover:text-emerald-400 truncate select-all transition-colors flex items-center gap-2"
                   title="Call directly"
                 >
-                  <PhoneCall className="w-3.5 h-3.5 text-emerald-400" />
+                  <PhoneCall className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                   <span>{formattedPhone}</span>
                 </a>
                 <button
                   onClick={handleCopyPhone}
-                  className="shrink-0 p-2.5 rounded-xl bg-zinc-800 hover:bg-emerald-400 hover:text-black text-zinc-300 transition-all"
+                  className="shrink-0 p-2 sm:p-2.5 rounded-lg sm:rounded-xl bg-zinc-800 hover:bg-emerald-400 hover:text-black text-zinc-300 transition-all"
                   title={isPhoneCopied ? 'Phone Copied!' : 'Copy Phone Number'}
                   aria-label="Copy phone number"
                 >
@@ -189,87 +188,87 @@ export const SectorContact: React.FC = () => {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl bg-emerald-500/15 border border-emerald-500/30 hover:bg-emerald-500/25 text-emerald-400 hover:text-emerald-300 font-tech text-xs tracking-wider uppercase transition-all duration-300 shadow-[0_0_20px_rgba(16,185,129,0.15)]"
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-emerald-500/15 border border-emerald-500/30 hover:bg-emerald-500/25 text-emerald-400 hover:text-emerald-300 font-tech text-xs tracking-wider uppercase transition-all duration-300 shadow-[0_0_20px_rgba(16,185,129,0.15)] text-center"
               >
-                <WhatsappIcon className="w-4 h-4 text-emerald-400" />
-                <span>CHAT ON WHATSAPP (+91 {phoneNumber})</span>
-                <ExternalLink className="w-3 h-3 ml-1" />
+                <WhatsappIcon className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span className="truncate">CHAT ON WHATSAPP (+91 {phoneNumber})</span>
+                <ExternalLink className="w-3 h-3 ml-1 shrink-0" />
               </a>
 
               <div className="pt-2 border-t border-white/[0.06] text-xs font-tech text-emerald-400 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
                 <span>{tContact.availability}</span>
               </div>
             </div>
 
             {/* Verified Profiles */}
-            <div className="rounded-3xl border border-white/[0.08] bg-[#08080e]/70 p-7 space-y-4">
+            <div className="rounded-2xl sm:rounded-3xl border border-white/[0.08] bg-[#08080e]/70 p-5 sm:p-7 space-y-3 sm:space-y-4">
               <div className="text-xs font-tech text-zinc-400 tracking-widest uppercase">
                 {tContact.socialsTitle}
               </div>
 
-              <div className="flex flex-col gap-2.5">
+              <div className="flex flex-col gap-2 sm:gap-2.5">
                 <a
                   href={githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3.5 rounded-xl border border-white/[0.06] bg-zinc-900/50 hover:border-zinc-500 text-xs font-tech text-zinc-200 transition-all"
+                  className="flex items-center justify-between p-3 sm:p-3.5 rounded-xl border border-white/[0.06] bg-zinc-900/50 hover:border-zinc-500 text-xs font-tech text-zinc-200 transition-all"
                 >
                   <div className="flex items-center gap-2.5">
-                    <GithubIcon className="w-4 h-4 text-accent-cyan" />
+                    <GithubIcon className="w-4 h-4 text-accent-cyan shrink-0" />
                     <span>GitHub Repositories</span>
                   </div>
-                  <ExternalLink className="w-3.5 h-3.5 text-zinc-500" />
+                  <ExternalLink className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
                 </a>
 
                 <a
                   href={linkedinUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3.5 rounded-xl border border-white/[0.06] bg-zinc-900/50 hover:border-zinc-500 text-xs font-tech text-zinc-200 transition-all"
+                  className="flex items-center justify-between p-3 sm:p-3.5 rounded-xl border border-white/[0.06] bg-zinc-900/50 hover:border-zinc-500 text-xs font-tech text-zinc-200 transition-all"
                 >
                   <div className="flex items-center gap-2.5">
-                    <LinkedinIcon className="w-4 h-4 text-accent-cyan" />
+                    <LinkedinIcon className="w-4 h-4 text-accent-cyan shrink-0" />
                     <span>LinkedIn Professional Network</span>
                   </div>
-                  <ExternalLink className="w-3.5 h-3.5 text-zinc-500" />
+                  <ExternalLink className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
                 </a>
 
                 <a
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3.5 rounded-xl border border-emerald-500/20 bg-emerald-950/20 hover:border-emerald-500/40 text-xs font-tech text-emerald-300 transition-all"
+                  className="flex items-center justify-between p-3 sm:p-3.5 rounded-xl border border-emerald-500/20 bg-emerald-950/20 hover:border-emerald-500/40 text-xs font-tech text-emerald-300 transition-all"
                 >
                   <div className="flex items-center gap-2.5">
-                    <WhatsappIcon className="w-4 h-4 text-emerald-400" />
+                    <WhatsappIcon className="w-4 h-4 text-emerald-400 shrink-0" />
                     <span>WhatsApp Direct Transmission</span>
                   </div>
-                  <ExternalLink className="w-3.5 h-3.5 text-emerald-500/60" />
+                  <ExternalLink className="w-3.5 h-3.5 text-emerald-500/60 shrink-0" />
                 </a>
               </div>
             </div>
           </div>
 
           {/* Right: Direct Gmail Dispatch Form (7 Cols) */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 w-full">
             <form
               onSubmit={handleSubmit}
-              className="rounded-3xl border border-white/[0.1] bg-[#08080e]/95 backdrop-blur-2xl p-8 sm:p-12 space-y-6 shadow-2xl"
+              className="rounded-2xl sm:rounded-3xl border border-white/[0.1] bg-[#08080e]/95 backdrop-blur-2xl p-5 sm:p-8 md:p-12 space-y-5 sm:space-y-6 shadow-2xl"
             >
               {/* Recipient Notice Banner */}
-              <div className="flex flex-wrap items-center justify-between gap-3 p-4 rounded-2xl bg-accent-cyan/10 border border-accent-cyan/25 text-xs font-tech">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-2 h-2 rounded-full bg-accent-cyan animate-pulse" />
+              <div className="flex flex-wrap items-center justify-between gap-2.5 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-accent-cyan/10 border border-accent-cyan/25 text-xs font-tech">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-accent-cyan animate-pulse shrink-0" />
                   <span className="text-zinc-400">TO (RECEIVER):</span>
                   <span className="text-white font-bold select-all">{contactEmail}</span>
                 </div>
-                <span className="text-[11px] text-accent-cyan">AUTOMATICALLY PRE-FILLED</span>
+                <span className="text-[10px] sm:text-[11px] text-accent-cyan">AUTOMATICALLY PRE-FILLED</span>
               </div>
 
-              {/* Form Inputs (No Email needed from visitor because it sends from their own Gmail account) */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="space-y-2">
+              {/* Form Inputs (text-base sm:text-sm avoids iOS auto-zoom shift) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                <div className="space-y-1.5 sm:space-y-2">
                   <label className="text-xs font-tech tracking-wider uppercase text-zinc-400 block">
                     {tContact.formName} *
                   </label>
@@ -278,14 +277,14 @@ export const SectorContact: React.FC = () => {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="e.g. Sanni Singh"
-                    className={`w-full px-4 py-3.5 rounded-xl bg-black/60 border text-sm text-white placeholder-zinc-600 focus:outline-none transition-colors ${
+                    className={`w-full px-4 py-3 sm:py-3.5 rounded-xl bg-black/60 border text-base sm:text-sm text-white placeholder-zinc-600 focus:outline-none transition-colors ${
                       errors.name ? 'border-red-500/80' : 'border-white/[0.08] focus:border-accent-cyan'
                     }`}
                   />
                   {errors.name && <span className="text-[11px] font-tech text-red-400 block">{errors.name}</span>}
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-1.5 sm:space-y-2">
                   <label className="text-xs font-tech tracking-wider uppercase text-zinc-400 block">
                     {tContact.formSubject}
                   </label>
@@ -294,26 +293,26 @@ export const SectorContact: React.FC = () => {
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     placeholder="e.g. Build medical app"
-                    className="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-accent-cyan transition-colors"
+                    className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-black/60 border border-white/[0.08] text-base sm:text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-accent-cyan transition-colors"
                   />
                 </div>
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-1.5 sm:space-y-2">
                 <div className="flex items-center justify-between">
                   <label className="text-xs font-tech tracking-wider uppercase text-zinc-400 block">
                     {tContact.formMessage} *
                   </label>
-                  <span className="text-[11px] font-tech text-zinc-500">
-                    Will appear pre-filled in your Gmail
+                  <span className="text-[10px] sm:text-[11px] font-tech text-zinc-500">
+                    Will appear in your Gmail
                   </span>
                 </div>
                 <textarea
-                  rows={5}
+                  rows={4}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Type your message here (e.g. Please respond regarding medical app build)..."
-                  className={`w-full px-4 py-3.5 rounded-xl bg-black/60 border text-sm text-white placeholder-zinc-600 focus:outline-none transition-colors resize-none ${
+                  className={`w-full px-4 py-3 sm:py-3.5 rounded-xl bg-black/60 border text-base sm:text-sm text-white placeholder-zinc-600 focus:outline-none transition-colors resize-none ${
                     errors.message ? 'border-red-500/80' : 'border-white/[0.08] focus:border-accent-cyan'
                   }`}
                 />
@@ -323,36 +322,36 @@ export const SectorContact: React.FC = () => {
               {/* Submit Action: Direct Launch in Gmail */}
               <button
                 type="submit"
-                className="w-full py-4 rounded-xl bg-accent-cyan hover:bg-sky-400 text-black font-tech font-bold text-xs sm:text-sm tracking-widest uppercase transition-all duration-300 shadow-[0_0_25px_rgba(56,189,248,0.3)] hover:shadow-[0_0_35px_rgba(56,189,248,0.6)] flex items-center justify-center gap-2.5"
+                className="w-full py-3.5 sm:py-4 rounded-xl bg-accent-cyan hover:bg-sky-400 text-black font-tech font-bold text-xs sm:text-sm tracking-widest uppercase transition-all duration-300 shadow-[0_0_25px_rgba(56,189,248,0.3)] hover:shadow-[0_0_35px_rgba(56,189,248,0.6)] flex items-center justify-center gap-2.5"
               >
-                <GmailIcon className="w-4 h-4 text-black" />
+                <GmailIcon className="w-4 h-4 text-black shrink-0" />
                 <span>OPEN & SEND IN GMAIL</span>
-                <Send className="w-4 h-4 ml-1" />
+                <Send className="w-4 h-4 ml-1 shrink-0" />
               </button>
 
               {/* Success / Feedback Banner with 1-click links */}
               {submittedLink && (
-                <div className="p-5 rounded-2xl bg-[#0d1620] border border-accent-cyan/40 space-y-3">
+                <div className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-[#0d1620] border border-accent-cyan/40 space-y-3">
                   <div className="flex items-start gap-2.5 text-xs font-tech text-accent-cyan">
                     <Check className="w-4 h-4 shrink-0 text-emerald-400 mt-0.5" />
                     <span>
-                      Gmail compose tab launched with receiver <strong className="text-white font-mono select-all">{contactEmail}</strong> and your message pre-filled. Just click <strong>Send</strong> in Gmail!
+                      Gmail compose launched with receiver <strong className="text-white font-mono select-all">{contactEmail}</strong> and your message pre-filled. Just click <strong>Send</strong> in Gmail!
                     </span>
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-3 pt-2 border-t border-white/[0.08] text-xs font-tech">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 pt-2 border-t border-white/[0.08] text-xs font-tech">
                     <a
                       href={submittedLink.gmail}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-3.5 py-1.5 rounded-lg bg-accent-cyan/20 hover:bg-accent-cyan/30 text-accent-cyan transition-colors flex items-center gap-1.5"
+                      className="px-3.5 py-2 rounded-lg bg-accent-cyan/20 hover:bg-accent-cyan/30 text-accent-cyan transition-colors flex items-center justify-center gap-1.5"
                     >
                       <GmailIcon className="w-3.5 h-3.5" />
                       <span>Re-open in Gmail Web</span>
                     </a>
                     <a
                       href={submittedLink.mailto}
-                      className="px-3.5 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors flex items-center gap-1.5"
+                      className="px-3.5 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors flex items-center justify-center gap-1.5"
                     >
                       <Mail className="w-3.5 h-3.5" />
                       <span>Open in Mail App (Outlook / Apple Mail)</span>
