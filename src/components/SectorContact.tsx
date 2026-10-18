@@ -50,7 +50,7 @@ export const SectorContact: React.FC = () => {
   const phoneNumber = '6388872564';
   const formattedPhone = '+91 63888 72564';
   const whatsappUrl = `https://wa.me/916388872564?text=${encodeURIComponent('Hi Ankit, I visited your 3D portfolio and would like to connect!')}`;
-  const githubUrl = 'https://github.com/ankit-a63/Ankit-Portfolio';
+  const githubUrl = 'https://github.com/ankit-a63';
   const linkedinUrl = 'https://www.linkedin.com/in/ankit-singh-b501b8375/';
   const instagramUrl = 'https://www.instagram.com/justankix';
 
@@ -223,7 +223,7 @@ export const SectorContact: React.FC = () => {
                 >
                   <div className="flex items-center gap-2.5">
                     <GithubIcon className="w-4 h-4 text-accent-cyan shrink-0" />
-                    <span>GitHub Repositories</span>
+                    <span>GitHub Profile (@ankit-a63)</span>
                   </div>
                   <ExternalLink className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
                 </a>

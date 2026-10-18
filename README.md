@@ -40,6 +40,7 @@
 - **Phone / WhatsApp**: [+91 6388872564](https://wa.me/916388872564)
 - **LinkedIn**: [Ankit Singh](https://www.linkedin.com/in/ankit-singh-b501b8375/)
 - **Instagram**: [@justankix](https://www.instagram.com/justankix)
+- **GitHub**: [ankit-a63](https://github.com/ankit-a63)
 
 ---
 
