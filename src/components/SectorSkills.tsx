@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { skillCategories } from '../data/skills';
-import { useLanguage } from '../context/LanguageContext';
-import { Cpu, CheckCircle, Layers, Activity } from 'lucide-react';
+import { portfolioContent } from '../data/translations';
+import { Cpu, CheckCircle, Activity } from 'lucide-react';
+
+interface ActiveSkillType {
+  name: string;
+  level: string;
+  icon: string;
+  description: string;
+  categoryId?: string;
+}
 
 export const SectorSkills: React.FC = () => {
-  const { t, language } = useLanguage();
+  const { skills: tSkills } = portfolioContent;
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [activeSkill, setActiveSkill] = useState<{
-    name: string;
-    level: string;
-    description: { en: string; hi: string };
-  } | null>(null);
+  const [activeSkill, setActiveSkill] = useState<ActiveSkillType | null>(null);
 
-  const allSkills = skillCategories.flatMap((cat) =>
+  const allSkills: ActiveSkillType[] = skillCategories.flatMap((cat) =>
     cat.skills.map((skill) => ({ ...skill, categoryId: cat.id }))
   );
 
@@ -28,10 +32,10 @@ export const SectorSkills: React.FC = () => {
   }, [allSkills, activeSkill]);
 
   const categories = [
-    { id: 'all', label: language === 'en' ? 'All Skills (11)' : 'सभी कौशल (11)' },
-    { id: 'frontend', label: t.skills.categories.frontend },
-    { id: 'backend', label: t.skills.categories.backend },
-    { id: 'tools', label: t.skills.categories.tools },
+    { id: 'all', label: 'All Skills (11)' },
+    { id: 'frontend', label: tSkills.categories.frontend },
+    { id: 'backend', label: tSkills.categories.backend },
+    { id: 'tools', label: tSkills.categories.tools },
   ];
 
   return (
@@ -43,21 +47,21 @@ export const SectorSkills: React.FC = () => {
         {/* Sector Tag */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-accent-cyan/30 bg-black/60 text-xs font-tech text-accent-cyan tracking-widest uppercase mb-8">
           <Cpu className="w-3.5 h-3.5" />
-          <span>SECTOR 04 // {t.skills.badge}</span>
+          <span>SECTOR 04 // {tSkills.badge}</span>
         </div>
 
         {/* Heading */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-16">
           <div>
             <h2 className="text-4xl sm:text-6xl lg:text-8xl font-editorial font-extrabold tracking-tight text-white leading-[0.98]">
-              {t.skills.headline}
+              {tSkills.headline}
             </h2>
             <p className="mt-6 text-zinc-400 font-tech text-sm sm:text-base max-w-2xl leading-relaxed">
-              {t.skills.subhead}
+              {tSkills.subhead}
             </p>
           </div>
           <div className="text-xs font-tech text-zinc-500 hidden lg:block">
-            {t.skills.interactiveHint}
+            {tSkills.interactiveHint}
           </div>
         </div>
 
@@ -140,10 +144,10 @@ export const SectorSkills: React.FC = () => {
 
                   <div className="pt-2">
                     <span className="text-xs font-tech text-zinc-500 block mb-2 uppercase tracking-wider">
-                      {language === 'en' ? 'Practical Context & Scope' : 'व्यावहारिक उपयोग और विवरण'}
+                      Practical Context & Scope
                     </span>
                     <p className="text-sm text-zinc-200 leading-relaxed font-normal">
-                      {activeSkill.description[language]}
+                      {activeSkill.description}
                     </p>
                   </div>
 

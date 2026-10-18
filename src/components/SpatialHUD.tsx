@@ -1,38 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { useLanguage } from '../context/LanguageContext';
-import { Globe, Volume2, VolumeX, Compass, Navigation } from 'lucide-react';
+import { portfolioContent } from '../data/translations';
+import { Volume2, VolumeX, ArrowUpRight, Menu, X } from 'lucide-react';
+import { ASMonogram } from './ASMonogram';
 
 interface SpatialHUDProps {
-  velocity: number;
   isMuted: boolean;
   onToggleSound: () => void;
 }
 
-export const SpatialHUD: React.FC<SpatialHUDProps> = ({
-  velocity,
-  isMuted,
-  onToggleSound,
-}) => {
-  const { language, toggleLanguage, t } = useLanguage();
+export const SpatialHUD: React.FC<SpatialHUDProps> = ({ isMuted, onToggleSound }) => {
   const [scrollPercent, setScrollPercent] = useState(0);
   const [activeSector, setActiveSector] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const sectors = [
-    { id: 'sector-origin', code: 'SEC_01', name: language === 'en' ? 'ORIGIN CORE' : 'मूल केंद्र' },
-    { id: 'sector-story', code: 'SEC_02', name: language === 'en' ? 'IDENTITY ARCHIVE' : 'परिचय अभिलेख' },
-    { id: 'sector-creations', code: 'SEC_03', name: language === 'en' ? 'HOLO CREATIONS' : 'लाइव प्रोजेक्ट्स' },
-    { id: 'sector-neural', code: 'SEC_04', name: language === 'en' ? 'NEURAL REACTOR' : 'कौशल केंद्र' },
-    { id: 'sector-beacon', code: 'SEC_05', name: language === 'en' ? 'TRANSMISSION BEACON' : 'संपर्क बीकन' },
+    { id: 'sector-origin', code: '01', name: 'INTRO' },
+    { id: 'sector-story', code: '02', name: 'STORY' },
+    { id: 'sector-creations', code: '03', name: 'WORK' },
+    { id: 'sector-neural', code: '04', name: 'SKILLS' },
+    { id: 'sector-beacon', code: '05', name: 'CONTACT' },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
+      setIsScrolled(window.scrollY > 30);
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
       if (maxScroll > 0) {
         const percent = Math.min(Math.max(Math.round((window.scrollY / maxScroll) * 100), 0), 100);
         setScrollPercent(percent);
 
-        const currentPos = window.scrollY + window.innerHeight * 0.4;
+        const currentPos = window.scrollY + window.innerHeight * 0.35;
         sectors.forEach((sec, idx) => {
           const el = document.getElementById(sec.id);
           if (el) {
@@ -49,9 +47,10 @@ export const SpatialHUD: React.FC<SpatialHUDProps> = ({
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [sectors]);
+  }, []);
 
   const warpToSector = (id: string) => {
+    setIsMobileMenuOpen(false);
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
@@ -60,60 +59,135 @@ export const SpatialHUD: React.FC<SpatialHUDProps> = ({
 
   return (
     <>
-      {/* Top Cockpit Telemetry Rail */}
-      <header className="fixed top-0 left-0 right-0 z-40 px-6 sm:px-12 py-5 flex items-center justify-between pointer-events-none select-none bg-gradient-to-b from-[#050508]/90 via-[#050508]/40 to-transparent backdrop-blur-[2px]">
-        {/* Left: Vessel Identity */}
-        <div className="flex items-center gap-3.5 pointer-events-auto">
-          <div className="relative w-8 h-8 rounded-lg border border-accent-cyan/40 bg-black/60 flex items-center justify-center shadow-[0_0_15px_rgba(56,189,248,0.2)]">
-            <span className="font-editorial font-extrabold text-xs text-white">AS</span>
-            <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-accent-cyan animate-ping" />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-editorial font-bold text-xs sm:text-sm tracking-wider text-white">
-              ANKIT SINGH // 2026
-            </span>
-            <span className="text-[10px] font-tech text-zinc-500 tracking-widest">
-              CSE DIPLOMA // BALLIA, UP
-            </span>
-          </div>
-        </div>
+      {/* Top Precision Razor Progress Line */}
+      <div className="fixed top-0 left-0 right-0 h-[2px] bg-white/[0.04] z-50 pointer-events-none">
+        <div
+          className="h-full bg-gradient-to-r from-accent-cyan via-white to-accent-cyan transition-all duration-75 ease-out shadow-[0_0_12px_#38bdf8]"
+          style={{ width: `${scrollPercent}%` }}
+        />
+      </div>
 
-        {/* Center: Warp Velocity Indicator */}
-        <div className="hidden lg:flex items-center gap-6 px-4 py-1.5 rounded-full border border-white/[0.08] bg-black/50 backdrop-blur-md pointer-events-auto">
-          <div className="flex items-center gap-2 text-[10px] font-tech text-zinc-400">
-            <Compass className="w-3.5 h-3.5 text-accent-cyan animate-spin" style={{ animationDuration: '10s' }} />
-            <span>WARP VELOCITY:</span>
-            <span className="text-white font-bold">{Math.round(velocity * 12)} KM/S</span>
-          </div>
-          <div className="w-[1px] h-3 bg-zinc-700" />
-          <div className="text-[10px] font-tech text-zinc-400">
-            SECTOR: <span className="text-accent-cyan font-bold">{sectors[activeSector].code}</span>
-          </div>
-        </div>
-
-        {/* Right: Audio + Language Toggles */}
-        <div className="flex items-center gap-3 pointer-events-auto">
+      {/* Main Luxury Header */}
+      <header
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
+          isScrolled
+            ? 'py-3.5 bg-[#07070a]/85 backdrop-blur-xl border-b border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.6)]'
+            : 'py-6 bg-transparent'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 flex items-center justify-between">
+          {/* Brand Identity */}
           <button
-            onClick={toggleLanguage}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-zinc-700/80 bg-black/60 hover:border-accent-cyan text-xs font-tech text-zinc-300 hover:text-white transition-all shadow-[0_0_12px_rgba(0,0,0,0.5)]"
-            title="Toggle Language (English / हिन्दी)"
+            onClick={() => warpToSector('sector-origin')}
+            className="group flex items-center gap-3.5 focus:outline-none text-left"
           >
-            <Globe className="w-3.5 h-3.5 text-accent-cyan" />
-            <span>{language === 'en' ? 'हिन्दी' : 'ENGLISH'}</span>
+            <ASMonogram size={38} glow={true} className="transition-transform duration-300 group-hover:scale-105" />
+            <div className="flex flex-col">
+              <span className="font-editorial font-bold text-sm sm:text-base tracking-widest text-white group-hover:text-accent-cyan transition-colors">
+                ANKIT SINGH
+              </span>
+              <span className="text-[10px] font-tech tracking-wider text-zinc-400">
+                Govt. Polytechnic Bansdeeh, Ballia
+              </span>
+            </div>
           </button>
 
-          <button
-            onClick={onToggleSound}
-            className="p-2 rounded-full border border-zinc-700/80 bg-black/60 hover:border-accent-cyan text-zinc-400 hover:text-white transition-all"
-            title={isMuted ? 'Atmosphere Audio Off' : 'Atmosphere Audio On'}
-            aria-label="Toggle ambient audio"
-          >
-            {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-accent-cyan animate-pulse" />}
-          </button>
+          {/* Desktop Navigation Links */}
+          <nav className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/[0.08] bg-[#0c0c12]/70 backdrop-blur-md">
+            {sectors.map((sec, idx) => {
+              const isActive = activeSector === idx;
+              return (
+                <button
+                  key={sec.id}
+                  onClick={() => warpToSector(sec.id)}
+                  className={`relative px-4 py-1.5 rounded-full text-xs font-tech tracking-widest uppercase transition-all duration-300 ${
+                    isActive
+                      ? 'text-white bg-white/[0.1] shadow-[0_0_15px_rgba(56,189,248,0.25)]'
+                      : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]'
+                  }`}
+                >
+                  {sec.name}
+                  {isActive && (
+                    <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-accent-cyan shadow-[0_0_8px_#38bdf8]" />
+                  )}
+                </button>
+              );
+            })}
+          </nav>
+
+          {/* Right Action Center: Audio Toggle + Contact Action */}
+          <div className="hidden lg:flex items-center gap-4">
+            <button
+              onClick={onToggleSound}
+              className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-zinc-700/60 bg-zinc-900/60 hover:border-accent-cyan/60 hover:bg-zinc-800/80 transition-all text-xs font-tech tracking-wider text-zinc-300 hover:text-white focus:outline-none"
+              title={isMuted ? 'Atmosphere Audio Off' : 'Atmosphere Audio On'}
+              aria-label="Toggle ambient atmosphere audio"
+            >
+              {isMuted ? (
+                <VolumeX className="w-3.5 h-3.5" />
+              ) : (
+                <Volume2 className="w-3.5 h-3.5 text-accent-cyan animate-pulse" />
+              )}
+              <span>{isMuted ? 'AUDIO OFF' : 'AUDIO ON'}</span>
+            </button>
+
+            <button
+              onClick={() => warpToSector('sector-beacon')}
+              className="group px-5 py-2 rounded-full border border-accent-cyan/40 bg-accent-cyan/10 hover:bg-accent-cyan hover:text-black transition-all duration-300 text-xs font-tech tracking-wider text-accent-cyan font-bold flex items-center gap-1.5 shadow-[0_0_15px_rgba(56,189,248,0.2)]"
+            >
+              <span>LET'S CONNECT</span>
+              <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="flex lg:hidden items-center gap-3">
+            <button
+              onClick={onToggleSound}
+              className="p-2 rounded-full border border-zinc-800 bg-zinc-900/80 text-zinc-400 hover:text-white"
+              aria-label="Toggle audio"
+            >
+              {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 text-accent-cyan" />}
+            </button>
+
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 rounded-xl border border-zinc-800 bg-zinc-900/90 text-zinc-300 hover:text-white focus:outline-none"
+              aria-label="Toggle navigation menu"
+            >
+              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
       </header>
 
-      {/* Right Holographic Waypoint Radar (Desktop) */}
+      {/* Mobile Navigation Drawer */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-30 bg-[#07070a]/98 backdrop-blur-2xl flex flex-col justify-between p-8 pt-24 lg:hidden animate-in fade-in duration-300">
+          <div className="flex flex-col gap-6">
+            <div className="text-[10px] font-tech tracking-widest text-zinc-500 uppercase">
+              INDEX // NAVIGATION
+            </div>
+            {sectors.map((sec) => (
+              <button
+                key={sec.id}
+                onClick={() => warpToSector(sec.id)}
+                className="flex items-center justify-between text-2xl font-editorial font-bold text-zinc-200 hover:text-accent-cyan text-left border-b border-zinc-800/80 pb-4 transition-colors"
+              >
+                <span>{sec.name}</span>
+                <span className="text-xs font-tech text-zinc-500">{sec.code}</span>
+              </button>
+            ))}
+          </div>
+
+          <div className="flex flex-col gap-4 pt-6 border-t border-zinc-800 text-xs font-tech text-zinc-400">
+            <div>Govt. Polytechnic Bansdeeh, Ballia</div>
+            <div>Summer Training @ SkillManthan Technologies</div>
+          </div>
+        </div>
+      )}
+
+      {/* Right Holographic Waypoint Rail (Desktop) */}
       <nav
         aria-label="Spatial Sectors"
         className="hidden xl:flex fixed right-8 top-1/2 -translate-y-1/2 z-40 flex-col items-end gap-5 pointer-events-auto select-none"
@@ -155,26 +229,6 @@ export const SpatialHUD: React.FC<SpatialHUDProps> = ({
           );
         })}
       </nav>
-
-      {/* Bottom Spatial Coordinates HUD */}
-      <footer className="fixed bottom-6 left-8 right-8 z-40 hidden md:flex items-center justify-between text-[10px] font-tech text-zinc-500 pointer-events-none select-none">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-            <span className="text-zinc-300">SPATIAL WARP ENGINE V3.0</span>
-          </div>
-          <div className="w-[1px] h-3 bg-zinc-800" />
-          <span>ORIGIN: GOLU POLYTECHNIC // BALLIA, UP</span>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <span>PROGRESSION:</span>
-          <span className="text-white font-bold">{scrollPercent < 10 ? `00${scrollPercent}` : scrollPercent < 100 ? `0${scrollPercent}` : scrollPercent}%</span>
-          <div className="w-20 h-1 bg-zinc-900 rounded-full overflow-hidden">
-            <div className="h-full bg-accent-cyan" style={{ width: `${scrollPercent}%` }} />
-          </div>
-        </div>
-      </footer>
     </>
   );
 };

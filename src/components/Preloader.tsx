@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ASMonogram } from './ASMonogram';
-import { useLanguage } from '../context/LanguageContext';
+import { portfolioContent } from '../data/translations';
 
 interface PreloaderProps {
   onComplete: () => void;
@@ -9,7 +9,7 @@ interface PreloaderProps {
 export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
   const [isExiting, setIsExiting] = useState(false);
-  const { t } = useLanguage();
+  const { preloader } = portfolioContent;
 
   useEffect(() => {
     // Smooth progress counter simulation
@@ -49,9 +49,9 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       <div className="w-full max-w-6xl flex justify-between items-center text-xs font-tech tracking-widest text-zinc-500 uppercase">
         <span className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-accent-cyan animate-ping" />
-          {t.preloader.subtitle}
+          {preloader.subtitle}
         </span>
-        <span>{t.preloader.author}</span>
+        <span>{preloader.author}</span>
       </div>
 
       {/* Centerpiece: Animated AS Monogram with Counter */}
@@ -68,7 +68,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         </div>
 
         <p className="mt-4 text-xs font-tech tracking-widest text-zinc-400 uppercase">
-          {t.preloader.status}
+          {preloader.status}
         </p>
       </div>
 

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { LanguageProvider } from './context/LanguageContext';
 import { SmoothScroll } from './components/SmoothScroll';
 import { Preloader } from './components/Preloader';
 import { CustomCursor } from './components/CustomCursor';
@@ -16,7 +15,6 @@ import { Footer } from './components/Footer';
 export const AppContent: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const [scrollVelocity, setScrollVelocity] = useState(0);
 
   const toggleSound = () => {
     setIsAudioPlaying((prev) => !prev);
@@ -29,11 +27,10 @@ export const AppContent: React.FC = () => {
         <CustomCursor />
 
         {/* 3D Spatial Fly-Through & Warp Starfield Engine */}
-        <SpatialCanvas onVelocityChange={setScrollVelocity} />
+        <SpatialCanvas />
 
-        {/* Cybernetic Cockpit Telemetry HUD & Waypoints */}
+        {/* Cockpit Header & Navigation HUD */}
         <SpatialHUD
-          velocity={scrollVelocity}
           isMuted={!isAudioPlaying}
           onToggleSound={toggleSound}
         />
@@ -61,9 +58,5 @@ export const AppContent: React.FC = () => {
 };
 
 export default function App() {
-  return (
-    <LanguageProvider>
-      <AppContent />
-    </LanguageProvider>
-  );
+  return <AppContent />;
 }

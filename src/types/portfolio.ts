@@ -1,56 +1,33 @@
-export type Language = 'en' | 'hi';
-
 export interface Project {
   id: string;
   title: string;
-  category: {
-    en: string;
-    hi: string;
-  };
-  subtitle: {
-    en: string;
-    hi: string;
-  };
-  description: {
-    en: string;
-    hi: string;
-  };
+  category: string;
+  subtitle: string;
+  description: string;
   liveUrl: string;
   tags: string[];
   metrics: {
-    label: { en: string; hi: string };
+    label: string;
     value: string;
   }[];
-  features: {
-    en: string[];
-    hi: string[];
-  };
+  features: string[];
   accentColor: string;
   themeStyle: string;
 }
 
 export interface SkillCategory {
   id: string;
-  name: {
-    en: string;
-    hi: string;
-  };
+  name: string;
   skills: {
     name: string;
-    level: string; // descriptive, e.g. "Practical Experience", "Core Proficiency", "Summer Training Focus"
+    level: string;
     icon: string;
-    description: {
-      en: string;
-      hi: string;
-    };
+    description: string;
   }[];
 }
 
 export interface NavItem {
   id: string;
-  label: {
-    en: string;
-    hi: string;
-  };
+  label: string;
   href: string;
 }

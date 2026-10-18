@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLanguage } from '../context/LanguageContext';
+import { portfolioContent } from '../data/translations';
 import { Send, Copy, Check, MessageSquare, ExternalLink, AlertCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -16,7 +16,7 @@ const LinkedinIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' 
 );
 
 export const SectorContact: React.FC = () => {
-  const { t, language } = useLanguage();
+  const { contact: tContact } = portfolioContent;
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -40,9 +40,9 @@ export const SectorContact: React.FC = () => {
 
   const validate = () => {
     const newErrors: { [key: string]: string } = {};
-    if (!formData.name.trim()) newErrors.name = t.contact.validationErrors.name;
-    if (!formData.email.trim() || !formData.email.includes('@')) newErrors.email = t.contact.validationErrors.email;
-    if (!formData.message.trim() || formData.message.length < 5) newErrors.message = t.contact.validationErrors.message;
+    if (!formData.name.trim()) newErrors.name = tContact.validationErrors.name;
+    if (!formData.email.trim() || !formData.email.includes('@')) newErrors.email = tContact.validationErrors.email;
+    if (!formData.message.trim() || formData.message.length < 5) newErrors.message = tContact.validationErrors.message;
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -62,16 +62,14 @@ export const SectorContact: React.FC = () => {
 
     const subjectParam = encodeURIComponent(formData.subject.trim() || `Transmission from ${formData.name}`);
     const bodyParam = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}\n\n[Transmitted via Ankit Singh Spatial 3D Terminal]`
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}\n\n[Transmitted via Ankit Singh Portfolio Terminal]`
     );
 
     const mailtoUrl = `mailto:${contactEmail}?subject=${subjectParam}&body=${bodyParam}`;
     window.location.href = mailtoUrl;
 
     setSubmissionFeedback(
-      language === 'en'
-        ? `Opening email client to send transmission to ${contactEmail}. If your client didn't open, use "Copy Email" button!`
-        : `ईमेल क्लाइंट खुल रहा है (${contactEmail})। यदि ईमेल क्लाइंट नहीं खुलता है, तो 'ईमेल कॉपी करें' बटन का उपयोग करें!`
+      `Opening email client to send transmission to ${contactEmail}. If your client didn't open automatically, please click "Copy Email" to copy the address!`
     );
   };
 
@@ -84,16 +82,16 @@ export const SectorContact: React.FC = () => {
         {/* Sector Tag */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-accent-cyan/30 bg-black/60 text-xs font-tech text-accent-cyan tracking-widest uppercase mb-8">
           <MessageSquare className="w-3.5 h-3.5" />
-          <span>SECTOR 05 // {t.contact.badge}</span>
+          <span>SECTOR 05 // {tContact.badge}</span>
         </div>
 
         {/* Heading */}
         <div className="mb-20">
           <h2 className="text-4xl sm:text-6xl lg:text-8xl font-editorial font-extrabold tracking-tight text-white leading-[0.98] max-w-5xl">
-            {t.contact.headline}
+            {tContact.headline}
           </h2>
           <p className="mt-6 text-zinc-400 font-tech text-sm sm:text-base max-w-2xl leading-relaxed">
-            {t.contact.subhead}
+            {tContact.subhead}
           </p>
         </div>
 
@@ -102,7 +100,7 @@ export const SectorContact: React.FC = () => {
           <div className="lg:col-span-5 space-y-8">
             <div className="rounded-3xl border border-white/[0.1] bg-[#090910]/85 backdrop-blur-2xl p-8 space-y-6">
               <div className="text-xs font-tech text-accent-cyan tracking-widest uppercase">
-                {t.contact.directEmailTitle}
+                {tContact.directEmailTitle}
               </div>
 
               <div className="p-4 rounded-2xl bg-black/60 border border-white/[0.08] flex items-center justify-between gap-3">
@@ -112,7 +110,7 @@ export const SectorContact: React.FC = () => {
                 <button
                   onClick={handleCopyEmail}
                   className="shrink-0 p-2.5 rounded-xl bg-zinc-800 hover:bg-accent-cyan hover:text-black text-zinc-300 transition-all"
-                  title={isCopied ? t.contact.copiedEmail : t.contact.copyEmail}
+                  title={isCopied ? tContact.copiedEmail : tContact.copyEmail}
                   aria-label="Copy email address"
                 >
                   {isCopied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
@@ -120,19 +118,19 @@ export const SectorContact: React.FC = () => {
               </div>
 
               <p className="text-xs font-tech text-zinc-400 leading-relaxed">
-                {t.contact.directEmailNote}
+                {tContact.directEmailNote}
               </p>
 
               <div className="pt-4 border-t border-white/[0.06] text-xs font-tech text-emerald-400 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>{t.contact.availability}</span>
+                <span>{tContact.availability}</span>
               </div>
             </div>
 
             {/* Socials */}
             <div className="rounded-3xl border border-white/[0.08] bg-[#08080e]/70 p-8 space-y-4">
               <div className="text-xs font-tech text-zinc-400 tracking-widest uppercase">
-                {t.contact.socialsTitle}
+                {tContact.socialsTitle}
               </div>
 
               <div className="flex flex-col gap-3">
@@ -174,7 +172,7 @@ export const SectorContact: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-xs font-tech tracking-wider uppercase text-zinc-400 block">
-                    {t.contact.formName} *
+                    {tContact.formName} *
                   </label>
                   <input
                     type="text"
@@ -190,7 +188,7 @@ export const SectorContact: React.FC = () => {
 
                 <div className="space-y-2">
                   <label className="text-xs font-tech tracking-wider uppercase text-zinc-400 block">
-                    {t.contact.formEmail} *
+                    {tContact.formEmail} *
                   </label>
                   <input
                     type="email"
@@ -207,7 +205,7 @@ export const SectorContact: React.FC = () => {
 
               <div className="space-y-2">
                 <label className="text-xs font-tech tracking-wider uppercase text-zinc-400 block">
-                  {t.contact.formSubject}
+                  {tContact.formSubject}
                 </label>
                 <input
                   type="text"
@@ -220,7 +218,7 @@ export const SectorContact: React.FC = () => {
 
               <div className="space-y-2">
                 <label className="text-xs font-tech tracking-wider uppercase text-zinc-400 block">
-                  {t.contact.formMessage} *
+                  {tContact.formMessage} *
                 </label>
                 <textarea
                   rows={4}
@@ -239,7 +237,7 @@ export const SectorContact: React.FC = () => {
                 className="w-full py-4 rounded-xl bg-accent-cyan hover:bg-sky-400 text-black font-tech font-bold text-xs sm:text-sm tracking-widest uppercase transition-all duration-300 shadow-[0_0_25px_rgba(56,189,248,0.3)] hover:shadow-[0_0_35px_rgba(56,189,248,0.6)] flex items-center justify-center gap-2"
               >
                 <Send className="w-4 h-4" />
-                <span>{t.contact.sendBtn}</span>
+                <span>{tContact.sendBtn}</span>
               </button>
 
               {submissionFeedback && (

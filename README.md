@@ -1,16 +1,15 @@
 # Ankit Singh — Futuristic Interactive 3D Portfolio
 
-> Premium personal portfolio for Ankit Singh, engineered with React, Vite, TypeScript, Three.js, GSAP, and Tailwind CSS. Featuring cinematic editorial storytelling, real-time 3D interactive WebGL sculpture, and dual-language (English / हिन्दी) support.
+> Premium personal portfolio for Ankit Singh, engineered with React, Vite, TypeScript, Three.js, GSAP, and Tailwind CSS. Featuring cinematic editorial storytelling, real-time 3D interactive WebGL sculpture, and responsive layout.
 
 ---
 
 ## 🌟 Key Features
 
 - **Cinematic Preloader & AS Monogram**: Fluid vector stroke drawing with real-time percentage counter (`00` → `100%`).
-- **Interactive 3D WebGL Sculpture**: Custom Three.js composition featuring a gyroscopic gimbal, faceted chrome polyhedron, wireframe cage, and quantum particle swarm with inertial pointer tracking.
-- **Editorial Typography & Visual Identity**: Deep obsidian tones (`#070709`), charcoal, titanium silver, and electric cyan accents.
+- **Interactive 3D WebGL Sculpture**: Custom Three.js composition featuring a dark faceted chrome polyhedron, delicate orbital gimbal rings, and a 1,800-particle celestial stardust wave with smooth pointer parallax.
+- **Editorial Typography & Visual Identity**: Deep obsidian tones (`#050508`), charcoal, titanium silver, and electric cyan accents.
 - **Full GSAP Motion System**: Choreographed entrance timelines, scroll-triggered section reveals, and tactile micro-interactions.
-- **Dual-Language Switcher**: Instant switching between **English** and **हिन्दी** with a centralized translation architecture.
 - **Ambient Audio Synthesizer**: Native Web Audio API futuristic soundscape (muted by default with toggle).
 - **Custom Desktop Cursor**: Magnetic trailing cursor with dynamic hover states (disabled on touch devices).
 
@@ -35,7 +34,7 @@
 - **Name**: Ankit Singh
 - **Role**: Aspiring Web Developer & Technology Enthusiast
 - **Education**: Diploma in Computer Science & Engineering, 4th Semester
-- **Institution**: Golu Polytechnic, Bansdih, Ballia, Uttar Pradesh
+- **Institution**: Government Polytechnic Bansdeeh, Ballia, Uttar Pradesh
 - **Practical Training**: Summer Training at SkillManthan Technologies Pvt. Ltd.
 
 ---

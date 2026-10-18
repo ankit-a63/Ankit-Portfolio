@@ -1,10 +1,10 @@
 import React from 'react';
 import { ASMonogram } from './ASMonogram';
-import { useLanguage } from '../context/LanguageContext';
+import { portfolioContent } from '../data/translations';
 import { ArrowUp, Terminal } from 'lucide-react';
 
 export const Footer: React.FC = () => {
-  const { t, language } = useLanguage();
+  const { nav, footer } = portfolioContent;
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -23,9 +23,7 @@ export const Footer: React.FC = () => {
                 ANKIT SINGH
               </div>
               <div className="text-xs font-tech text-zinc-500">
-                {language === 'en'
-                  ? 'Diploma in CSE @ Golu Polytechnic, Ballia'
-                  : 'डिप्लोमा इन सीएसई @ गोलू पॉलिटेक्निक, बलिया'}
+                Diploma in CSE @ Government Polytechnic Bansdeeh, Ballia
               </div>
             </div>
           </div>
@@ -33,16 +31,16 @@ export const Footer: React.FC = () => {
           {/* Quick Anchor Jumps */}
           <div className="flex flex-wrap items-center gap-6 text-xs font-tech uppercase tracking-widest text-zinc-400">
             <a href="#sector-story" className="hover:text-accent-cyan transition-colors">
-              {t.nav.about}
+              {nav.about}
             </a>
             <a href="#sector-creations" className="hover:text-accent-cyan transition-colors">
-              {t.nav.work}
+              {nav.work}
             </a>
             <a href="#sector-neural" className="hover:text-accent-cyan transition-colors">
-              {t.nav.skills}
+              {nav.skills}
             </a>
             <a href="#sector-beacon" className="hover:text-accent-cyan transition-colors">
-              {t.nav.contact}
+              {nav.contact}
             </a>
           </div>
 
@@ -51,7 +49,7 @@ export const Footer: React.FC = () => {
             onClick={scrollToTop}
             className="group flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-800 bg-zinc-900/60 hover:border-accent-cyan hover:text-white transition-all text-xs font-tech text-zinc-300"
           >
-            <span>{t.footer.backToTop}</span>
+            <span>{footer.backToTop}</span>
             <ArrowUp className="w-3.5 h-3.5 transition-transform group-hover:-translate-y-1 text-accent-cyan" />
           </button>
         </div>
@@ -59,11 +57,11 @@ export const Footer: React.FC = () => {
         {/* Bottom Copyright & Architecture Notice */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-tech text-zinc-500">
           <div>
-            &copy; {new Date().getFullYear()} Ankit Singh. {t.footer.copyright}
+            &copy; {new Date().getFullYear()} Ankit Singh. {footer.copyright}
           </div>
           <div className="flex items-center gap-2">
             <Terminal className="w-3.5 h-3.5 text-accent-cyan" />
-            <span>{t.footer.credit}</span>
+            <span>{footer.credit}</span>
           </div>
         </div>
       </div>
