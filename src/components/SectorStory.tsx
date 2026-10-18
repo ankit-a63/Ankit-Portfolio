@@ -60,29 +60,126 @@ export const SectorStory: React.FC = () => {
           </h2>
         </div>
 
-        {/* Scrubbed Narrative Pad */}
-        <div className="relative rounded-2xl sm:rounded-3xl border border-white/[0.08] bg-[#090910]/85 backdrop-blur-2xl p-6 sm:p-12 lg:p-16 mb-12 sm:mb-20 overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.8)]">
-          <div className="absolute top-8 right-8 opacity-10 pointer-events-none hidden md:block">
-            <ASMonogram size={180} glow={false} />
+        {/* Editorial Profile Showcase & Scrubbed Narrative Pad */}
+        <div className="relative rounded-2xl sm:rounded-3xl border border-white/[0.08] bg-[#090910]/85 backdrop-blur-2xl p-6 sm:p-10 lg:p-12 mb-12 sm:mb-20 overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.8)]">
+          <div className="absolute top-8 right-8 opacity-5 pointer-events-none hidden lg:block">
+            <ASMonogram size={220} glow={false} />
           </div>
 
-          <div className="relative z-10 max-w-4xl space-y-4 sm:space-y-6">
-            <span className="text-accent-cyan font-editorial text-3xl sm:text-4xl block leading-none">“</span>
-            <p
-              ref={textContainerRef}
-              className="text-base sm:text-2xl lg:text-3xl font-editorial font-bold leading-relaxed tracking-tight"
-            >
-              {words.map((word, i) => (
-                <span key={i} className="spatial-word inline-block mr-1.5 sm:mr-2 transition-colors duration-150">
-                  {word}
-                </span>
-              ))}
-            </p>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Left Col: Authentic Portrait Showcase (5 cols) */}
+            <div className="lg:col-span-5 relative group">
+              {/* Subtle Cyan Glow Halo */}
+              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-tr from-accent-cyan/25 via-sky-500/10 to-transparent blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
-            <div className="pt-4 sm:pt-6 border-t border-white/[0.08] flex flex-wrap items-center gap-2 sm:gap-4 text-xs font-tech text-zinc-400">
-              <span className="text-accent-cyan font-bold">ANKIT SINGH</span>
-              <div className="w-1.5 h-1.5 rounded-full bg-zinc-700 hidden sm:block" />
-              <span>Government Polytechnic Bansdeeh, Ballia</span>
+              {/* Main Portrait Card */}
+              <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-accent-cyan/35 bg-[#06060c] shadow-2xl">
+                {/* Photo with responsive ratio */}
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-zinc-950">
+                  <img
+                    src="/ankit-singh.png"
+                    alt="Ankit Singh - CSE Student & Developer"
+                    className="w-full h-full object-cover object-top filter contrast-[1.03] brightness-[1.02] group-hover:scale-105 transition-transform duration-700 ease-out"
+                    loading="eager"
+                  />
+
+                  {/* Gradient Vignette overlay for seamless blending */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#06060c] via-transparent to-black/20 pointer-events-none" />
+
+                  {/* Top Status Pill */}
+                  <div className="absolute top-3.5 left-3.5 z-10 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/15 text-[10px] sm:text-[11px] font-tech text-white">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>VERIFIED DEVELOPER</span>
+                  </div>
+
+                  {/* Top Right Semester Pill */}
+                  <div className="absolute top-3.5 right-3.5 z-10 px-2.5 py-1 rounded-full bg-accent-cyan/20 backdrop-blur-md border border-accent-cyan/40 text-[10px] sm:text-[11px] font-tech text-accent-cyan font-bold">
+                    SEM 05
+                  </div>
+                </div>
+
+                {/* Portrait Card Telemetry Footer */}
+                <div className="p-4 sm:p-5 border-t border-white/[0.08] bg-[#090914] space-y-2.5">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="font-editorial font-bold text-lg sm:text-xl text-white tracking-wide">
+                        ANKIT SINGH
+                      </h3>
+                      <p className="text-[11px] font-tech text-accent-cyan">
+                        CSE 5th Semester • Full-Stack Developer
+                      </p>
+                    </div>
+                    <div className="text-right shrink-0">
+                      <div className="text-[10px] font-tech text-zinc-500 uppercase">LOCATION</div>
+                      <div className="text-xs font-tech text-zinc-300">Ballia, UP (IN)</div>
+                    </div>
+                  </div>
+
+                  <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-tech text-zinc-400">
+                    <span className="truncate max-w-[210px] xs:max-w-none">Govt. Polytechnic Bansdeeh</span>
+                    <span className="text-emerald-400 font-medium shrink-0">● ACTIVE</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Col: Scrubbed Narrative & Foundation Specs (7 cols) */}
+            <div className="lg:col-span-7 space-y-6 sm:space-y-8">
+              <div>
+                <span className="text-accent-cyan font-editorial text-4xl sm:text-5xl block leading-none mb-3">“</span>
+                <p
+                  ref={textContainerRef}
+                  className="text-lg sm:text-2xl lg:text-3xl font-editorial font-bold leading-relaxed tracking-tight"
+                >
+                  {words.map((word, i) => (
+                    <span key={i} className="spatial-word inline-block mr-1.5 sm:mr-2 transition-colors duration-150">
+                      {word}
+                    </span>
+                  ))}
+                </p>
+              </div>
+
+              {/* Foundation Specification Pills */}
+              <div className="pt-6 border-t border-white/[0.08] space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:border-accent-cyan/30 transition-colors">
+                    <div className="text-[10px] font-tech text-accent-cyan uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                      <GraduationCap className="w-3.5 h-3.5" />
+                      <span>ACADEMIC FOUNDATION</span>
+                    </div>
+                    <div className="text-sm font-editorial font-bold text-white">
+                      Diploma in Computer Science & Engg.
+                    </div>
+                    <div className="text-[11px] font-tech text-zinc-400 mt-1">
+                      Govt. Polytechnic Bansdeeh, Ballia (5th Sem)
+                    </div>
+                  </div>
+
+                  <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:border-accent-cyan/30 transition-colors">
+                    <div className="text-[10px] font-tech text-accent-cyan uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                      <Briefcase className="w-3.5 h-3.5" />
+                      <span>SUMMER INDUSTRY TRAINING</span>
+                    </div>
+                    <div className="text-sm font-editorial font-bold text-white">
+                      Web Development Practicum
+                    </div>
+                    <div className="text-[11px] font-tech text-zinc-400 mt-1">
+                      SkillManthan Technologies Pvt. Ltd.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-tech text-zinc-400 pt-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-accent-cyan font-bold">ANKIT SINGH</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-zinc-700" />
+                    <span>Government Polytechnic Bansdeeh, Ballia</span>
+                  </div>
+                  <div className="text-[11px] text-zinc-500">
+                    Scroll down to inspect engineered works ↓
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

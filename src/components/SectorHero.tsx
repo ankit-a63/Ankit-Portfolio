@@ -18,8 +18,19 @@ export const SectorHero: React.FC = () => {
       className="relative min-h-[90vh] sm:min-h-[92vh] w-full flex flex-col justify-center px-4 sm:px-12 lg:px-24 pt-28 sm:pt-32 pb-16 sm:pb-20 z-10 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto w-full">
-        {/* Status Badges */}
+        {/* Status & Developer Identity Badges */}
         <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-6 sm:mb-8">
+          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-accent-cyan/40 bg-black/70 backdrop-blur-md shadow-[0_0_15px_rgba(56,189,248,0.18)]">
+            <img
+              src="/ankit-singh.png"
+              alt="Ankit Singh"
+              className="w-5 h-5 rounded-full object-cover object-top ring-1 ring-accent-cyan shrink-0"
+            />
+            <span className="text-[11px] sm:text-xs font-tech text-white font-semibold tracking-wide">
+              ANKIT SINGH // 5TH SEM
+            </span>
+          </div>
+
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 backdrop-blur-md text-[11px] sm:text-xs font-tech tracking-wider text-emerald-400">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
             <span>AVAILABLE FOR WORK</span>
