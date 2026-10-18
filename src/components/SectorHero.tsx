@@ -24,7 +24,7 @@ export const SectorHero: React.FC = () => {
             <img
               src="/ankit-singh.png"
               alt="Ankit Singh"
-              className="w-5 h-5 rounded-full object-cover object-top ring-1 ring-accent-cyan shrink-0"
+              className="w-5 h-5 rounded-full object-cover object-center ring-1 ring-accent-cyan shrink-0"
             />
             <span className="text-[11px] sm:text-xs font-tech text-white font-semibold tracking-wide">
               ANKIT SINGH // 5TH SEM

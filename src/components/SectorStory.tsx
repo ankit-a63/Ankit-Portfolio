@@ -74,12 +74,12 @@ export const SectorStory: React.FC = () => {
 
               {/* Main Portrait Card */}
               <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-accent-cyan/35 bg-[#06060c] shadow-2xl">
-                {/* Photo with responsive ratio */}
-                <div className="relative aspect-[4/5] w-full overflow-hidden bg-zinc-950">
+                {/* Photo with 1:1 profile square ratio */}
+                <div className="relative aspect-square w-full overflow-hidden bg-zinc-950">
                   <img
                     src="/ankit-singh.png"
                     alt="Ankit Singh - CSE Student & Developer"
-                    className="w-full h-full object-cover object-top filter contrast-[1.03] brightness-[1.02] group-hover:scale-105 transition-transform duration-700 ease-out"
+                    className="w-full h-full object-cover object-center filter contrast-[1.02] brightness-[1.01] group-hover:scale-105 transition-transform duration-700 ease-out"
                     loading="eager"
                   />
 
