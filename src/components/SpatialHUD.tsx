@@ -164,7 +164,7 @@ export const SpatialHUD: React.FC = () => {
             </button>
             <div className="flex items-center justify-between text-[11px] text-zinc-500 pt-1">
               <span>Govt. Polytechnic Bansdeeh, Ballia</span>
-              <span>CSE 4th Sem</span>
+              <span>CSE 5th Sem</span>
             </div>
           </div>
         </div>

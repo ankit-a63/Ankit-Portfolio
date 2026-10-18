@@ -33,11 +33,13 @@
 
 - **Name**: Ankit Singh
 - **Role**: Aspiring Web Developer & Technology Enthusiast
-- **Education**: Diploma in Computer Science & Engineering, 4th Semester
+- **Education**: Diploma in Computer Science & Engineering, 5th Semester
 - **Institution**: Government Polytechnic Bansdeeh, Ballia, Uttar Pradesh
 - **Practical Training**: Summer Training at SkillManthan Technologies Pvt. Ltd.
 - **Email**: [ankitsani6288@gmail.com](mailto:ankitsani6288@gmail.com)
 - **Phone / WhatsApp**: [+91 6388872564](https://wa.me/916388872564)
+- **LinkedIn**: [Ankit Singh](https://www.linkedin.com/in/ankit-singh-b501b8375/)
+- **Instagram**: [@justankix](https://www.instagram.com/justankix)
 
 ---
 
