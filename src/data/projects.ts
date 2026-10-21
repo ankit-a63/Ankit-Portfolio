@@ -71,7 +71,7 @@ export const projects: Project[] = [
     category: 'SPORTS TECH // LIVE SCORE PLATFORM',
     subtitle: 'High-performance live cricket score engine with interactive 3D spatial arena',
     description: 'An elite live cricket score platform delivering sub-second real-time match scores, comprehensive scorecards, interactive 3D spatial arena with procedural leather shaders (Three.js), upcoming fixtures with automatic IST scheduling, tournament standings, and serverless API proxy caching.',
-    liveUrl: 'https://ankix-sports.vercel.app/',
+    liveUrl: 'https://ankixsports.vercel.app/',
     tags: ['React 19', 'Three.js 3D Arena', 'TypeScript', 'TanStack Query', 'Tailwind CSS', 'Vercel Serverless'],
     metrics: [
       {

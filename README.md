@@ -27,9 +27,9 @@
 - **Live URL**: `https://smartvillage-jet.vercel.app/`
 - **Description**: A digital governance platform focused on village-level public complaints, Gram Panchayat resource directories, and transparent administrative workflows.
 
-### 3. [Ankix Sports](https://ankix-sports.vercel.app/)
+### 3. [Ankix Sports](https://ankixsports.vercel.app/)
 - **Category**: Sports Tech & Live Cricket Score Platform
-- **Live URL**: `https://ankix-sports.vercel.app/`
+- **Live URL**: `https://ankixsports.vercel.app/`
 - **GitHub**: `https://github.com/ankit-a63/ankix-sports`
 - **Description**: An elite real-time cricket live score engine featuring sub-second match updates, ball-by-ball scorecards, interactive 3D spatial arena with procedural leather shaders (Three.js), upcoming fixtures with IST schedules, tournament standings, and serverless API proxy caching.
 
