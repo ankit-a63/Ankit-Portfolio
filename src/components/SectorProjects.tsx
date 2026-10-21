@@ -1,7 +1,7 @@
 import React from 'react';
 import { projects } from '../data/projects';
 import { portfolioContent } from '../data/translations';
-import { ExternalLink, Layers, CheckCircle2, Shield, Wrench, Building2, Terminal } from 'lucide-react';
+import { ExternalLink, Layers, CheckCircle2, Shield, Wrench, Building2, Terminal, Trophy, Flame } from 'lucide-react';
 
 export const SectorProjects: React.FC = () => {
   const { projects: tProjects } = portfolioContent;
@@ -30,7 +30,7 @@ export const SectorProjects: React.FC = () => {
           </div>
           <div className="text-right hidden lg:block">
             <span className="text-4xl font-editorial font-extrabold text-zinc-700">
-              02 / 02
+              0{projects.length} / 0{projects.length}
             </span>
           </div>
         </div>
@@ -188,7 +188,7 @@ export const SectorProjects: React.FC = () => {
                           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
                         </div>
                       </div>
-                    ) : (
+                    ) : project.id === 'smart-village' ? (
                       <div className="space-y-2.5 sm:space-y-3">
                         <div className="p-3 sm:p-3.5 rounded-xl bg-gradient-to-br from-zinc-900 to-[#0e1726] border border-zinc-800">
                           <div className="flex items-center justify-between mb-2">
@@ -215,6 +215,46 @@ export const SectorProjects: React.FC = () => {
                         <div className="p-2 sm:p-2.5 rounded-xl border border-zinc-800 bg-zinc-900/40 text-[9px] sm:text-[10px] font-tech text-zinc-400 flex items-center justify-between">
                           <span>Workflow Automation Standard</span>
                           <span className="text-sky-400 font-bold">v2.4</span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="space-y-2.5 sm:space-y-3">
+                        <div className="p-3 sm:p-3.5 rounded-xl bg-gradient-to-br from-zinc-900 to-[#052016] border border-emerald-900/40">
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center gap-1.5">
+                              <Trophy className="w-3.5 h-3.5 text-emerald-400" />
+                              <span className="font-editorial font-bold text-xs text-white">LIVE MATCH CENTRE</span>
+                            </div>
+                            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[9px] font-tech bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                              <span>LIVE 60 FPS</span>
+                            </span>
+                          </div>
+                          <div className="p-2 sm:p-2.5 rounded bg-black/60 border border-white/5 space-y-1">
+                            <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-tech">
+                              <span className="text-white font-bold flex items-center gap-1">
+                                <Flame className="w-3 h-3 text-emerald-400" />
+                                IND
+                              </span>
+                              <span className="text-emerald-400 font-bold tabular-nums">198/4 (18.4 ov)</span>
+                            </div>
+                            <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-tech text-zinc-400">
+                              <span>AUS</span>
+                              <span className="tabular-nums">194/8 (20.0 ov)</span>
+                            </div>
+                            <div className="pt-1 text-[9px] font-tech text-emerald-400/90 flex items-center justify-between border-t border-white/5">
+                              <span>India needs 3 runs in 8 balls</span>
+                              <span className="text-zinc-500">CRR: 10.60</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="p-2 sm:p-2.5 rounded-xl border border-zinc-800 bg-zinc-900/40 text-[9px] sm:text-[10px] font-tech text-zinc-400 flex items-center justify-between">
+                          <span className="flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                            <span>Three.js Spatial Cricket Arena</span>
+                          </span>
+                          <span className="text-emerald-400 font-bold">API Proxy Active</span>
                         </div>
                       </div>
                     )}

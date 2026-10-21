@@ -83,8 +83,8 @@ export const SectorStory: React.FC = () => {
                     loading="eager"
                   />
 
-                  {/* Gradient Vignette overlay for seamless blending */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#06060c] via-transparent to-black/20 pointer-events-none" />
+                  {/* Subtle bottom edge shadow for smooth transition */}
+                  <div className="absolute bottom-0 inset-x-0 h-8 bg-gradient-to-t from-[#090914]/60 to-transparent pointer-events-none" />
 
                   {/* Top Status Pill */}
                   <div className="absolute top-3.5 left-3.5 z-10 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/15 text-[10px] sm:text-[11px] font-tech text-white">

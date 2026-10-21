@@ -65,4 +65,36 @@ export const projects: Project[] = [
     accentColor: '#0284c7',
     themeStyle: 'blue',
   },
+  {
+    id: 'ankix-sports',
+    title: 'ANKIX SPORTS',
+    category: 'SPORTS TECH // LIVE SCORE PLATFORM',
+    subtitle: 'High-performance live cricket score engine with interactive 3D spatial arena',
+    description: 'An elite live cricket score platform delivering sub-second real-time match scores, comprehensive scorecards, interactive 3D spatial arena with procedural leather shaders (Three.js), upcoming fixtures with automatic IST scheduling, tournament standings, and serverless API proxy caching.',
+    liveUrl: 'https://ankix-sports.vercel.app/',
+    tags: ['React 19', 'Three.js 3D Arena', 'TypeScript', 'TanStack Query', 'Tailwind CSS', 'Vercel Serverless'],
+    metrics: [
+      {
+        label: 'Visual Engine',
+        value: '60 FPS 3D',
+      },
+      {
+        label: 'Sync Frequency',
+        value: 'Real-Time / 60s',
+      },
+      {
+        label: 'Architecture',
+        value: 'Serverless Proxy',
+      },
+    ],
+    features: [
+      'Interactive 3D Cricket Arena with procedural leather shaders, raised seam geometry & stadium lighting',
+      'Real-Time Match Centre with detailed batting tables, bowling economy, extras & commentary status',
+      'Upcoming Fixtures & Archive with countdown timers converted to Asia/Kolkata (IST)',
+      'Tournament Points Table & Standings browser covering international and domestic series',
+      'Secure Serverless Caching Proxy (api/*) protecting CricAPI quota with in-memory TTL',
+    ],
+    accentColor: '#10b981',
+    themeStyle: 'emerald',
+  },
 ];

@@ -30,8 +30,8 @@ export const portfolioContent = {
     ctaConnect: "LET'S CONNECT",
     scrollHint: 'SCROLL TO EXPLORE',
     metrics: {
-      projects: '2 CURATED PRODUCTION PROJECTS',
-      focus: 'PRACTICAL WEB UTILITIES & CIVIC TECH',
+      projects: '3 CURATED PRODUCTION PROJECTS',
+      focus: 'WEB UTILITIES, CIVIC TECH & SPORTS ARENA',
       approach: 'EXPERIMENT, BUILD, REFINE',
     },
   },
@@ -66,14 +66,14 @@ export const portfolioContent = {
   },
   // Projects
   projects: {
-    badge: 'FEATURED WORK // 02 LIVE DEPLOYMENTS',
+    badge: 'FEATURED WORK // 03 LIVE DEPLOYMENTS',
     headline: 'ENGINEERED DIGITAL PRODUCTS',
     subhead: 'Live web applications built with a focus on real-world utility, responsive design, and purposeful interaction.',
     visitLive: 'VISIT LIVE PROJECT',
     viewSource: 'EXPLORE STACK',
     builtWith: 'CORE TECHNOLOGIES',
     keyHighlights: 'SYSTEM ARCHITECTURE & HIGHLIGHTS',
-    projectCount: '02 / CURATED WORKS',
+    projectCount: '03 / CURATED WORKS',
   },
   // Skills
   skills: {
